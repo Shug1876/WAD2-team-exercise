@@ -1,3 +1,9 @@
 from django.contrib import admin
+from cycle_angelo.models import Post, Comment
 
-# Register your models here.
+class PostAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug':('content',)}
+
+
+admin.site.register(Post, PostAdmin)
+admin.site.register(Comment)

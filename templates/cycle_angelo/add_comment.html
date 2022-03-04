@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	
+	<title>Cycle Angelo - Add Comment</title>
+
+</head>
+
+<body>
+
+	<form id="comment_form" method="post" action="{% url 'cycle_angelo:add_comment' post.slug %}">
+
+		{% csrf_token %}
+		{% for hidden in form.hidden_fields %}
+		    {{ hidden }}
+		{% endfor %}
+		{% for field in form.visible_fields %}
+		    {{ field.errors }}
+		    {{ field.help_text }}
+		    {{ field }}
+		{% endfor %}
+
+		<input type="submit" name="submit" value="Create Comment" />
+
+<a href="/cycle_angelo/">Home</a> <br/>
+
+</body>
+
+
+</html>

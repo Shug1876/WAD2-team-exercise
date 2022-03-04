@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	
+	<title>Cycle Angelo - Add Post</title>
+
+</head>
+
+<body>
+
+	<form id="post_form" method="post" action="/cycle_angelo/add_post/">
+
+		{% csrf_token %}
+		{% for hidden in form.hidden_fields %}
+		    {{ hidden }}
+		{% endfor %}
+		{% for field in form.visible_fields %}
+		    {{ field.errors }}
+		    {{ field.help_text }}
+		    {{ field }}
+		{% endfor %}
+
+		<input type="submit" name="submit" value="Create Post" />
+
+
+</body>
+
+
+</html>

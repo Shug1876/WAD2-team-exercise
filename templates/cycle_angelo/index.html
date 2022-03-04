@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+
+<head>
+	
+	<title>Cycle Angelo - Index</title>
+
+</head>
+
+<body>
+	
+	<h1>Pls work</h1>
+	<a href = "/cycle_angelo/add_post/">Create a post</a> 
+	<a href = "/cycle_angelo/add_comment/">Create a comment</a> 
+
+    <h2>New Posts on Cycle Angelo</h2>
+	<ul>
+        {% for post in posts %}
+            <li>
+            <a href="/cycle_angelo/post/{{ post.slug }}/">{{ post.content }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
