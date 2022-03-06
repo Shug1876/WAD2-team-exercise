@@ -10,6 +10,11 @@ path('post/<slug:post_name_slug>/',
          views.show_post, name='show_post'),
 path('post/<slug:post_name_slug>/add_comment/',
          views.add_comment, name='add_comment'),
+path('register/', views.register, name='register'),
+path('login/', views.user_login, name='login'),
+path('logout/', views.user_logout, name='logout'),
+
+
 
 
 ]

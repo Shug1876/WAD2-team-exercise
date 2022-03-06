@@ -1,5 +1,5 @@
 from django.contrib import admin
-from cycle_angelo.models import Post, Comment
+from cycle_angelo.models import Post, Comment, UserProfile
 
 class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('content',)}
@@ -7,3 +7,4 @@ class PostAdmin(admin.ModelAdmin):
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Comment)
+admin.site.register(UserProfile)

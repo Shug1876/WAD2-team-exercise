@@ -22,8 +22,10 @@
 		    {% else %}
 		        <strong> No comments currently on this post.</strong>
 		    {% endif %}
-		    <a href="/cycle_angelo/post/{{ post.slug }}/add_comment/">Add Comment</a> <br/>
-		    <a href="/cycle_angelo/">Home</a> <br/>
+		    {% if user.is_authenticated %}
+		    <a href="{% url 'cycle_angelo:add_comment' post.slug %}">Add Comment</a> <br/>
+		    {% endif %}
+		    <a href="{% url 'cycle_angelo:index' %}">Home</a> <br/>
 		{% else %}
 		    The post you are looking for does not exist.
 		{% endif %}

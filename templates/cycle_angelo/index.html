@@ -12,15 +12,20 @@
 
 <body>
 	
-	<h1>Pls work</h1>
-	<a href = "/cycle_angelo/add_post/">Create a post</a> 
-	<a href = "/cycle_angelo/add_comment/">Create a comment</a> 
+	<h1>Cycle Angelo Home Page</h1>
+	{% if user.is_authenticated %}
+	Welcome back {{ user.username }}! <br />
+	<a href = "{% url 'cycle_angelo:add_post' %}">Create a post</a>
+	<a href="{% url 'cycle_angelo:logout' %}">Logout</a> 
+	{% endif %}
+	<a href = "{% url 'cycle_angelo:register' %}">Register</a>
+	<a href = "{% url 'cycle_angelo:login' %}">Login</a>
 
     <h2>New Posts on Cycle Angelo</h2>
 	<ul>
         {% for post in posts %}
             <li>
-            <a href="/cycle_angelo/post/{{ post.slug }}/">{{ post.content }}</a>
+            <a href="{% url 'cycle_angelo:show_post' post.slug %}">{{ post.content }}</a>
             </li>
         {% endfor %}
     </ul>

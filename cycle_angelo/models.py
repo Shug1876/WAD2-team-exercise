@@ -2,11 +2,17 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    picture = models.ImageField(upload_to='profile_images', blank=True)
+
+    def __str__(self):
+        return self.user.username
+
 class Post(models.Model):
 
     post_ID = models.AutoField(primary_key=True)
     content = models.CharField(max_length=200)
-    likes = models.IntegerField(default=0)
     picture = models.ImageField(upload_to='blog_post_images', blank=True)
     slug = models.SlugField(unique=True)
 
@@ -29,13 +35,7 @@ class Comment(models.Model):
     def __str__(self):
         return self.content
         
-#class UserProfile(models.Model):
- #   user = models.OneToOneField(User, on_delete=models.CASCADE)
-    
-  #  user_ID = models.AutoField(primary_key=True)
-   # username = models.CharField(unique=True, max_length=100)
-    #user_type = models.CharField(max_length=100)
-    #picture = models.ImageField(upload_to='profile_images', blank=True)
+
 
 
 
