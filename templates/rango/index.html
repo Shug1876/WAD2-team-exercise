@@ -6,8 +6,15 @@
     Homepage
 {% endblock %}
 
+{% block sub_heading %}
+    {% if user.is_authenticated %}
+        Welcome to the homepage {{ user.username }}.
+    {% else %}
+        Welcome to the homepage.
+    {% endif %}
+{% endblock %}
+
 {% block body_block %}
-        <h1>Rango says...</h1>
         <div>
             {% if user.is_authenticated %}
                 howdy {{ user.username }}!<br />
