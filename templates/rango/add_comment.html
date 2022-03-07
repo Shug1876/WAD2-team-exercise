@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Add a Comment
+{% endblock %}
+
+{% block sub_heading %}
+    Adding a Comment to {{ post.text }}
+{% endblock %}
+
+{% block body_block %}
+        <div>
+            <form id="comment_form" method="post" action="/rango/category/{{ category.slug }}/add_comment/">
+                {% csrf_token %}
+                {% csrf_token %}
+                {% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                {% endfor %}
+                {% for field in form.visible_fields %}
+                    {{ field.errors }}
+                    {{ field.help_text }}
+                    {{ field }}
+                {% endfor %}
+                <input type="submit" name="submit" value="Add Comment" />
+            </form>
+        </div>
+{% endblock %}

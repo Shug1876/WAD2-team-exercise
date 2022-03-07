@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Add a Post
+{% endblock %}
+
+{% block sub_heading %}
+    Adding a Post
+{% endblock %}
+
+{% block body_block %}
+        <div>
+            <form id="post_form" method="post" action="/rango/category/{{ category.slug }}/add_post/">
+                {% csrf_token %}
+                {% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                {% endfor %}
+                {% for field in form.visible_fields %}
+                    {{ field.errors }}
+                    {{ field.help_text }}
+                    {{ field }}
+                {% endfor %}
+                <input type="submit" name="submit" value="Add Post" />
+            </form>
+        </div>
+{% endblock %}
