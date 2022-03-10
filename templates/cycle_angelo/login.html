@@ -2,15 +2,11 @@
 {% extends 'rango/base.html' %}
 {% load staticfiles %}
 
-<html>
+{% block title_block %}
+    Login
+{% endblock %}
 
-<head>
-	
-	<title>Cycle Angelo - Login</title>
-
-</head>
-
-<body>
+{% block body_block %}
 	<h1>Login to Cycle Angelo</h1>
 
 	<form id="login_form" method="post" action="{% url 'cycle_angelo:login' %}">
@@ -25,3 +21,4 @@
 
 
 	</form>
+{% endblock %}
