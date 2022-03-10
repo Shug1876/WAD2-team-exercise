@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
 
 from cycle_angelo.forms import PostForm, CommentForm, UserForm, UserProfileForm
 from cycle_angelo.models import Comment, Post, UserProfile
@@ -17,6 +18,7 @@ def index(request):
 
     return render(request, 'cycle_angelo/index.html', context=context_dict)
 
+@login_required
 def add_post(request):
 
     form = PostForm()
@@ -35,6 +37,7 @@ def add_post(request):
 
     return render(request, 'cycle_angelo/add_post.html', {'form': form})
 
+@login_required
 def add_comment(request, post_name_slug):
 
     try:
@@ -64,10 +67,6 @@ def add_comment(request, post_name_slug):
     return render(request, 'cycle_angelo/add_comment.html', context=context_dict)
 
 
-
-
-
-   
 
 def show_post(request, post_name_slug):
 
