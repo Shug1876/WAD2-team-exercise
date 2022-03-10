@@ -12,7 +12,7 @@ def index(request):
 
     context_dict = {}
 
-    post_list = Post.objects.all()
+    post_list = Post.objects.order_by('-likes')[:5]
 
     context_dict['posts'] = post_list
 

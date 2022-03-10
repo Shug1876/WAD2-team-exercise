@@ -6,14 +6,17 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     picture = models.ImageField(upload_to='profile_images', blank=True)
 
+
     def __str__(self):
         return self.user.username
 
 class Post(models.Model):
-
+    TITLE_MAX_LENGTH = 128
     post_ID = models.AutoField(primary_key=True)
     content = models.CharField(max_length=200)
     picture = models.ImageField(upload_to='blog_post_images', blank=True)
+    title = models.CharField(max_length=TITLE_MAX_LENGTH)
+    likes = models.IntegerField(default=0)
     slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):
@@ -25,7 +28,7 @@ class Post(models.Model):
 
     def __str__(self):
 
-        return self.content
+        return self.title
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
