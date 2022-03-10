@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+{% extends 'rango/base.html' %}
 {% load staticfiles %}
 
 <html>
@@ -19,8 +19,7 @@
 	{% else %}
 	     <strong>Welcome to the Cycle Angelo register page!</strong><br />
 
-	     <form id="user_form" method="post" action="{% url 'cycle_angelo:register' %}"
-                16 enctype="multipart/form-data">
+         <form id="user_form" method="post" action="{% url 'cycle_angelo:register' %}" enctype="multipart/form-data">
 
             {% csrf_token %}
 
