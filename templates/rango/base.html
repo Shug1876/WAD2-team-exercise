@@ -106,6 +106,7 @@
         <div id="side_bar">
             <ul>
                 {% if user.is_authenticated %}
+                    <li><a href = "{% url 'cycle_angelo:add_post' %}">Create a post</a></li>
                     <li><a href="{% url 'cycle_angelo:logout' %}">Logout</a></li>
                 {% else %}
                     <li><a href="{% url 'cycle_angelo:register' %}">Sign Up</a></li>

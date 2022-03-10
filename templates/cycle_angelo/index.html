@@ -6,7 +6,9 @@
 
 <head>
 	
-	<title>Cycle Angelo - Index</title>
+{% block title_block %}
+    Index
+{% endblock %}
 
 </head>
 
@@ -21,11 +23,11 @@
 	<a href = "{% url 'cycle_angelo:register' %}">Register</a>
 	<a href = "{% url 'cycle_angelo:login' %}">Login</a>
 
-    <h2>New Posts on Cycle Angelo</h2>
+    <h2>Top Posts on Cycle Angelo</h2>
 	<ul>
         {% for post in posts %}
             <li>
-            <a href="{% url 'cycle_angelo:show_post' post.slug %}">{{ post.content }}</a>
+            <a href="{% url 'cycle_angelo:show_post' post.slug %}">{{post.creator}} says: {{ post.content }}</a>
             </li>
         {% endfor %}
     </ul>
