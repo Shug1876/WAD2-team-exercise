@@ -11,18 +11,18 @@
 {% endblock%}
 
 {% block body_block %}
-{% if registered %}
-CycleAngelo says: <strong>thank you for registering!</strong>
-<a href="{% url 'rango:index' %}">Return to the homepage.</a>
-{% else %}
-Register for CycleAngelo <strong>here!</strong>
-<form id="user_form" method="post" action="{% url 'rango:register' %}" enctype="multipart/form-data">
-    {% csrf_token %}
+    {% if registered %}
+        <strong>Thank you for registering with Cycle Angelo!</strong> <br />
+	    <a href="{% url 'cycle_angelo:index' %}">Return to the home page</a>
+    {% else %}
+        Register for CycleAngelo <strong>here!</strong>
+        <form id="user_form" method="post" action="{% url 'rango:register' %}" enctype="multipart/form-data">
+            {% csrf_token %}
 
-    {{ user_form.as_p }}
-    {{ profile_form.as_p }}
+            {{ user_form.as_p }}
+            {{ profile_form.as_p }}
 
-    <input type="submit" name="submit" value="Register" />
-</form>
-{% endif %}
+            <input type="submit" name="submit" value="Register" />
+        </form>
+        {% endif %}
 {% endblock %}
