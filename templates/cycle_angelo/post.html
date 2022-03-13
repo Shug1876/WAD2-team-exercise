@@ -17,7 +17,15 @@
 <body>
 	<div>
 		{% if post %}
-		    <h1>{{ post.content }}</h1>
+			{% if post.text %}
+		    	<h1>{{ post.text }}</h1>
+			{% endif %}
+			{% if post.image %}
+				<img src="{{ MEDIA_URL }}{{ post.image }}"
+				width ="300"
+				height="200"
+				alt="{{ post.creator }}'s image for the post" />
+			{% endif %}
 		    {% if comments %}
 		        <h2><u>Comments</u></h2>
 		        <ul>
