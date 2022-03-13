@@ -3,29 +3,33 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from datetime import datetime
 
 from cycle_angelo.forms import PostForm, CommentForm, UserForm, UserProfileForm
 from cycle_angelo.models import Comment, Post, UserProfile
 
 
 def index(request):
-
     context_dict = {}
 
+    # Get top 5 posts
     post_list = Post.objects.order_by('-likes')[:5]
+
+    # Get visits
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
 
     context_dict['posts'] = post_list
 
     return render(request, 'cycle_angelo/index.html', context=context_dict)
 
+
 @login_required
 def add_post(request):
-
     form = PostForm()
 
     if request.method == 'POST':
         form = PostForm(request.POST)
-
 
         if form.is_valid:
 
@@ -37,17 +41,17 @@ def add_post(request):
 
     return render(request, 'cycle_angelo/add_post.html', {'form': form})
 
+
 @login_required
 def add_comment(request, post_name_slug):
-
     try:
         post = Post.objects.get(slug=post_name_slug)
     except Post.DoesNotExist:
         post = None
 
-    if(post == None):
+    if (post == None):
         return redirect('/cycle_angelo/')
-    
+
     form = CommentForm()
 
     if request.method == 'POST':
@@ -59,17 +63,15 @@ def add_comment(request, post_name_slug):
                 comment.post = post
                 comment.save()
 
-                return redirect(reverse('cycle_angelo:show_post', kwargs={'post_name_slug':post_name_slug}))
+                return redirect(reverse('cycle_angelo:show_post', kwargs={'post_name_slug': post_name_slug}))
         else:
             print(form.errors)
 
-    context_dict = {'form':form, 'post':post}
+    context_dict = {'form': form, 'post': post}
     return render(request, 'cycle_angelo/add_comment.html', context=context_dict)
 
 
-
 def show_post(request, post_name_slug):
-
     context_dict = {}
 
     try:
@@ -88,7 +90,6 @@ def show_post(request, post_name_slug):
 
 
 def register(request):
-
     registered = False
 
     if request.method == 'POST':
@@ -106,11 +107,11 @@ def register(request):
             profile.user = user
 
             if 'picture' in request.FILES:
-                profile.picture = FILES['picture']
+                profile.picture = request.FILES['picture']
 
             profile.save()
 
-            registered = True 
+            registered = True
 
         else:
             print(user_form.errors, profile_form.errors)
@@ -118,18 +119,18 @@ def register(request):
         user_form = UserForm()
         profile_form = UserProfileForm()
 
-    return render(request, 'cycle_angelo/register.html/', 
-                  context = {'user_form':user_form, 'profile_form':profile_form, 'registered':registered})
+    return render(request, 'cycle_angelo/register.html/',
+                  context={'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
+
 
 def user_login(request):
-
     if request.method == 'POST':
-        
+
         username = request.POST.get('username')
         password = request.POST.get('password')
 
         user = authenticate(username=username, password=password)
-        
+
         if user:
             if user.is_active:
 
@@ -145,16 +146,33 @@ def user_login(request):
 
 
 def user_logout(request):
-
     logout(request)
 
     return redirect(reverse('cycle_angelo:index'))
 
 
+# Cookie helpers
+
+def get_server_side_cookie(request, cookie, default_val=None):
+    val = request.session.get(cookie)
+    if not val:
+        val = default_val
+
+    return val
 
 
+def visitor_cookie_handler(request):
+    visits = int(get_server_side_cookie(request, 'visits', '1'))
+    last_visit_cookie = get_server_side_cookie(request,
+                                               'last_visit',
+                                               str(datetime.now()))
 
+    last_visit_time = datetime.strptime(last_visit_cookie[:-7],
+                                        '%Y-%m-%d %H:%M:%S')
 
-
-
-
+    if (datetime.now() - last_visit_time).days > 0:
+        visits = visits + 1
+        request.session['last_visit'] = str(datetime.now())
+    else:
+        request.session['last_visit'] = last_visit_cookie
+        request.session['visits'] = visits
