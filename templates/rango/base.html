@@ -110,13 +110,14 @@
                 {% if user.is_authenticated %}
                     <li><a href = "{% url 'cycle_angelo:profile' %}">View Profile</a></li>
                     <li><a href = "{% url 'cycle_angelo:add_post' %}">Create a post</a></li>
-                    <li><a href="{% url 'cycle_angelo:logout' %}">Logout</a></li>
+                    <li><a href="{% url 'registration:logout' %}">Logout</a></li>
                 {% else %}
                     <li><a href="{% url 'cycle_angelo:register' %}">Sign Up</a></li>
-                    <li><a href="{% url 'cycle_angelo:login' %}">Login</a></li>
+                    <li><a href="{% url 'registration:login' %}">Login</a></li>
                 {% endif %}
                     <li><a href="{% url 'cycle_angelo:about' %}">View Posts</a></li>
                     <li><a href="{% url 'cycle_angelo:contact' %}">Contact Us</a></li>
+                    <li><a href = "{% url 'cycle_angelo:Search' %}">Search</a></li>
             </ul>
         </div>
     </body>

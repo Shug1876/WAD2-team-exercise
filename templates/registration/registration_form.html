@@ -1,0 +1,21 @@
+{% extends 'rango/base.html' %}
+
+<html>
+    <head>
+{% block title_block %}
+    Register
+{% endblock %}
+    </head>
+    <body>
+        {% block sub_heading %}
+            Register Here!
+        {% endblock %}
+        <form method="post" action".">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <input type="submit" value"Register" />
+        </form>
+    </body>
+</html>
