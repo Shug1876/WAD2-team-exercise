@@ -5,9 +5,13 @@
 <html>
 
 <head>
-	
-	<title>Cycle Angelo - Individual Post</title>
-
+	{% block title %}
+		{% if post %}
+			{{post.creator}}'s Post
+		{% else %}
+			Unknown Post
+		{% endif %}
+	{% endblock %}
 </head>
 
 <body>
@@ -30,6 +34,7 @@
 		    <a href="{% url 'cycle_angelo:index' %}">Home</a> <br/>
 		{% else %}
 		    The post you are looking for does not exist.
+			<a href="{% url 'cycle_angelo:index' %}">Return to the home page</a>
 		{% endif %}
 	</div>
 </body>

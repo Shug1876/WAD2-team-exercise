@@ -7,18 +7,25 @@
 {% endblock %}
 
 {% block body_block %}
-	<h1>Login to Cycle Angelo</h1>
+	{% block sub_heading %}
+		Login
+	{% endblock %}
+	
+	{% if user.is_authenticated %}
+		<strong>Thank you for registering with Cycle Angelo!</strong> <br />
+		<a href="{% url 'cycle_angelo:index' %}">Return to the home page</a>
+	{% else %}
+		<form id="login_form" method="post" action="{% url 'cycle_angelo:login' %}">
+			{% csrf_token %}
 
-	<form id="login_form" method="post" action="{% url 'cycle_angelo:login' %}">
-		{% csrf_token %}
+			Username: <input type="text" name="username" value="" size="50" />
+			<br />
+			Password:  <input type="password" name="password" value="" size="50" />
+			<br />
 
-		Username: <input type="text" name="username" value="" size="50" />
-		<br />
-		Password:  <input type="password" name="password" value="" size="50" />
-		<br />
-
-		<input type="submit" value="submit" />
+			<input type="submit" value="submit" />
 
 
-	</form>
+		</form>
+	{% endif %}
 {% endblock %}
