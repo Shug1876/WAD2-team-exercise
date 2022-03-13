@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,8 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cycle_angelo',
-    'registration',
 ]
+
+# Registration variables
+REGISTRATION_OPEN = True
+REGISTRATION_AUTO_LOGIN = True
+LOGIN_REDIRECT_URL = 'cycle_angelo:index'
+LOGIN_URL = 'auth_login'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -110,12 +116,6 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
 ]
-
-# Registration variables
-REGISTRATION_OPEN = True
-REGISTRATION_AUTO_LOGIN = True
-LOGIN_REDIRECT_URL = 'cycle_angelo:index'
-LOGIN_URL = 'auth_login'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/

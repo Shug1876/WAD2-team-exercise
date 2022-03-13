@@ -1,0 +1,26 @@
+{% extends 'rango/base.html' %}
+2 {% load staticfiles %}
+3
+4 {% block title_block %}
+5 Register - Step 2
+6 {% endblock %}
+7
+8 {% block body_block %}
+9 <div class="jumbotron p-4">
+10 <div class="container">
+11 <h1 class="jumbotron-heading">Register Here - Step 2</h1>
+12 </div>
+13 </div>
+14
+15 <div class="container">
+16 <div class="row">
+17 <form method="post"
+18 action="{% url 'cycle_angelo:register_profile' %}"
+19 enctype="multipart/form-data">
+20 {% csrf_token %}
+21 {{ form.as_p }}
+22 <input type="submit" value="Create Profile" />
+23 </form>
+24 </div>
+25 </div>
+26 {% endblock %}
