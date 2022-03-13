@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from cycle_angelo import views
 
 app_name = 'cycle_angelo'
@@ -13,6 +13,7 @@ path('post/<slug:post_name_slug>/add_comment/',
 path('register/', views.register, name='register'),
 path('login/', views.user_login, name='login'),
 path('logout/', views.user_logout, name='logout'),
+path('accounts/', include('registration.backends.simple.urls')),
 
 
 
