@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+
+<html>
+    <head>
+	
+        {% block title_block %}
+            Search
+        {% endblock %}
+        
+    </head>
+        
+    <body>
+        {% block sub_heading %}
+            Search
+        {% endblock %}
+
+        <form id="user-form" method="post" action="{% url 'cycle_angelo:search' %}">
+            {% csrf_token %}
+            <input class="form-control" type="text" size="50" name="query" id="query" />
+
+            <button class="btn btn-primary" type="submit" name="submit">Search</button>
+        </form>
+
+        {% if result_list %}
+            <h2>Result</h2>
+
+            {% for result in result_list %}
+                <a href="{{result.link}}">{{ result.title|safe|escape }}</a>
+                <p>{{ result.summary|safe|escape }}</p>
+            {% endfor %}
+        {% endif %}
+
+    </body>
+</html>

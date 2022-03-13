@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+
+<html>
+    <head>
+	
+        {% block title_block %}
+            Profile for {{ selected_user.username }}
+        {% endblock %}
+        
+    </head>
+        
+    <body>
+        {% block sub_heading %}
+            {{ selected_user.username }}'s Profile
+        {% endblock %}
+
+        <img src="{{ MEDIA_URL }}{{ user_profile.picture }}"
+            width ="300"
+            height="200"
+            alt="{{ selected_user.username }}'s profile picture" />
+        <br />
+        {% if selected_user == user %}
+        <form method="post" action"." enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <input type="submit" value="Update" />
+        </form>
+        {% endif %}
+    </body>
+</html>

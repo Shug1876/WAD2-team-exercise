@@ -13,15 +13,12 @@
 </head>
 
 <body>
-	
-	<h1>Cycle Angelo Home Page</h1>
+	{% block sub_heading %}
+		Home Page
+	{% endblock %}
 	{% if user.is_authenticated %}
 	Welcome back {{ user.username }}! <br />
-	<a href = "{% url 'cycle_angelo:add_post' %}">Create a post</a>
-	<a href="{% url 'cycle_angelo:logout' %}">Logout</a> 
 	{% endif %}
-	<a href = "{% url 'cycle_angelo:register' %}">Register</a>
-	<a href = "{% url 'cycle_angelo:login' %}">Login</a>
 
     <h2>Top Posts on Cycle Angelo</h2>
 	<ul>
