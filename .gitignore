@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+
+cycle_angelo/migrations/
+
 # C extensions
 *.so
 
