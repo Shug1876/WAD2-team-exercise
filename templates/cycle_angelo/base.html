@@ -66,6 +66,10 @@
             }
             #body_block{
             	display: block;
+                width: 78%;
+                height: 80vh;
+                margin-left: 22%;
+                background-color: #59e3ff;
             }
             
 
@@ -101,25 +105,30 @@
             </h2>
       	</div>
         <div>
-        {% block body_block %}
-        {% endblock %}
-        {% block sidebar_block %}
-        {% endblock %}
+        
         </div>
         <div id="side_bar">
             <ul>
                 {% if user.is_authenticated %}
-                    <li><a href = "{% url 'cycle_angelo:profile' %}">View Profile</a></li>
-                    <li><a href = "{% url 'cycle_angelo:add_post' %}">Create a post</a></li>
-                    <li><a>Logout</a></li>
+                    <li><a>View Profile</a></li>
+                    <li><a>Create a post</a></li>
+                    <li><a href="{% url 'auth_logout' %}?next={% url 'cycle_angelo:index' %}">Logout</a></li>
                 {% else %}
-                    <li><a href=>Sign Up</a></li>
-                    <li><a href=>Login</a></li>
+                    <li><a href="{% url 'registration_register' %}">Sign Up</a></li>
+                    <li><a href="{% url 'auth_login' %}">Login</a></li>
                 {% endif %}
                     <li><a >View Posts</a></li>
                     <li><a >Contact Us</a></li>
                     <li><a >Search</a></li>
             </ul>
         </div>
+
+        <div id="body_block">
+           {% block body_block %}
+        {% endblock %} 
+
+        </div>
+
+
     </body>
 </html>

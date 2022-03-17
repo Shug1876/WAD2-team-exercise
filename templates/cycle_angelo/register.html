@@ -13,6 +13,7 @@
 <body>
 
 
+{% block body_block %}
 	{% if registered %}
 	    <strong>Thank you for registering with Cycle Angelo!</strong> <br />
 	    <a href="{% url 'cycle_angelo:index' %}">Return to the home page.</a>
@@ -28,5 +29,8 @@
             <input type="submit" name="submit" value="Register" />
         </form>
     {% endif %}
+
+<p>Hello?aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+{% endblock %}
 </body>
 </html>
