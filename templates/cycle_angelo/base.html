@@ -81,7 +81,9 @@
     <body>
         <div id="header">
     		
+            <a href= "{% url 'cycle_angelo:index' %}">
     		<img src="{% static 'images/house_and_bike.png' %}" id="home_icon" alt="Home" />
+        </a>
     		<h1>Cycle Angelo</h1>
             <img src="{% static 'images/chainring.png' %}" id="chainring_icon" alt="Chainring" />
 
@@ -102,7 +104,6 @@
         {% block body_block %}
         {% endblock %}
         {% block sidebar_block %}
-            {% get_category_list category %}
         {% endblock %}
         </div>
         <div id="side_bar">
@@ -110,14 +111,14 @@
                 {% if user.is_authenticated %}
                     <li><a href = "{% url 'cycle_angelo:profile' %}">View Profile</a></li>
                     <li><a href = "{% url 'cycle_angelo:add_post' %}">Create a post</a></li>
-                    <li><a href="{% url 'registration:logout' %}">Logout</a></li>
+                    <li><a>Logout</a></li>
                 {% else %}
-                    <li><a href="{% url 'cycle_angelo:register' %}">Sign Up</a></li>
-                    <li><a href="{% url 'registration:login' %}">Login</a></li>
+                    <li><a href=>Sign Up</a></li>
+                    <li><a href=>Login</a></li>
                 {% endif %}
-                    <li><a href="{% url 'cycle_angelo:about' %}">View Posts</a></li>
-                    <li><a href="{% url 'cycle_angelo:contact' %}">Contact Us</a></li>
-                    <li><a href = "{% url 'cycle_angelo:Search' %}">Search</a></li>
+                    <li><a >View Posts</a></li>
+                    <li><a >Contact Us</a></li>
+                    <li><a >Search</a></li>
             </ul>
         </div>
     </body>
