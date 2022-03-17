@@ -15,10 +15,11 @@
 </head>
 
 <body>
+	{% block body_block %}
 	<div>
 		{% if post %}
-			{% if post.text %}
-		    	<h1>{{ post.text }}</h1>
+			{% if post.content %}
+		    	<h1>{{ post.content }}</h1>
 			{% endif %}
 			{% if post.image %}
 				<img src="{{ MEDIA_URL }}{{ post.image }}"
@@ -39,12 +40,13 @@
 		    {% if user.is_authenticated %}
 		    <a href="{% url 'cycle_angelo:add_comment' post.slug %}">Add Comment</a> <br/>
 		    {% endif %}
-		    <a href="{% url 'cycle_angelo:index' %}">Home</a> <br/>
 		{% else %}
 		    The post you are looking for does not exist.
 			<a href="{% url 'cycle_angelo:index' %}">Return to the home page</a>
 		{% endif %}
 	</div>
+
+	{% endblock %}
 </body>
 </html>
 

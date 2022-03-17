@@ -12,6 +12,7 @@
             Login
         {% endblock %}
 
+        {% block body_block %}
         <form method="post" action".">
             {% csrf_token %}
 
@@ -25,5 +26,6 @@
             Not registered?
             <a href="{% url 'registration_register' %}">Register here!</a>
         </p>
+        {% endblock %}
     </body>
 </html>

@@ -5,6 +5,17 @@
 <html>
 
 <head>
+
+	<style>
+		
+		#posts{
+			text-align: right;
+			color: red;
+
+
+		}
+
+	</style>
 	
 {% block title_block %}
     Index
@@ -20,7 +31,10 @@
 	Welcome back {{ user.username }}! <br />
 	{% endif %}
 
-    <h2>Top Posts on Cycle Angelo</h2>
+
+{% block body_block %}
+<div id="posts">
+    <h2 style="text-align: center;">Top Posts on Cycle Angelo:</h2>
 	<ul>
         {% for post in posts %}
             <li>
@@ -28,6 +42,7 @@
             </li>
         {% endfor %}
     </ul>
-
+</div>
+{% endblock %}
 </body>
 </html>

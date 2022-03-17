@@ -14,6 +14,7 @@
 
 <body>
 
+{% block body_block %}
 	<form id="comment_form" method="post" action="{% url 'cycle_angelo:add_comment' post.slug %}">
 
 		{% csrf_token %}
@@ -29,6 +30,8 @@
 		<input type="submit" name="submit" value="Create Comment" />
 
 <a href="{% url 'cycle_angelo:index' %}">Home</a> <br/>
+
+{% endblock %}
 
 </body>
 

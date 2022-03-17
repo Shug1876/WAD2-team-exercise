@@ -81,6 +81,8 @@
                 Base Template
             {% endblock %}
         </title>
+
+
     </head>
     <body>
         <div id="header">
@@ -98,7 +100,7 @@
     	</div>
     	<div id="sub_heading">
             <h2>
-                CycleAngelo - 
+                 
     		    {% block sub_heading%}
                     Base Template
     		    {% endblock %}
@@ -111,7 +113,7 @@
             <ul>
                 {% if user.is_authenticated %}
                     <li><a>View Profile</a></li>
-                    <li><a>Create a post</a></li>
+                    <li><a href="{% url 'cycle_angelo:add_post' %}">Create a post</a></li>
                     <li><a href="{% url 'auth_logout' %}?next={% url 'cycle_angelo:index' %}">Logout</a></li>
                 {% else %}
                     <li><a href="{% url 'registration_register' %}">Sign Up</a></li>

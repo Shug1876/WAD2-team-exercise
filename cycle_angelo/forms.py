@@ -3,12 +3,13 @@ from cycle_angelo.models import Post, Comment, UserProfile
 from django.contrib.auth.models import User
 
 class PostForm(forms.ModelForm):
-     content = forms.CharField(max_length=200, help_text='Please enter the text for the post you want to share!')
-     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
+    title = forms.CharField(help_text="Want to add a title? Add one here!", required=False)
+    content = forms.CharField(max_length=200, help_text='Please enter the text for the post you want to share!')
+    slug = forms.CharField(widget=forms.HiddenInput(), required=False)
      
-     class Meta:
-         model = Post
-         fields = ('content',)
+    class Meta:
+        model = Post
+        fields = ('title','content',)
     
 class CommentForm(forms.ModelForm):
     content = forms.CharField(max_length=150)

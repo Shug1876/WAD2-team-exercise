@@ -14,6 +14,12 @@
 
 <body>
 
+	{% block sub_heading %}
+            Create a post, {{ user.username }}!
+        {% endblock %}
+
+	{% block body_block %}
+
 	<form id="post_form" method="post" action="/cycle_angelo/add_post/">
 
 		{% csrf_token %}
@@ -24,11 +30,13 @@
 		    {{ field.errors }}
 		    {{ field.help_text }}
 		    {{ field }}
+		    <br />
+		    <br />
 		{% endfor %}
 
 		<input type="submit" name="submit" value="Create Post" />
 
-
+    {% endblock %}
 </body>
 
 
