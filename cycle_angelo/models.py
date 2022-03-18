@@ -1,3 +1,4 @@
+import django.utils.timezone
 from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
@@ -17,7 +18,13 @@ class Post(models.Model):
     TITLE_MAX_LENGTH = 128
     post_ID = models.AutoField(primary_key=True)
     content = models.CharField(max_length=200)
+    creator = models.ForeignKey(User,
+        on_delete=models.CASCADE,
+        related_name='posts',
+        editable=False)
+    created_on = models.DateTimeField(auto_now_add=True)
     picture = models.ImageField(upload_to='blog_post_images', blank=True)
+
     title = models.CharField(max_length=TITLE_MAX_LENGTH, default="[No post title]")
     likes = models.IntegerField(default=0)
     slug = models.SlugField(unique=True)
@@ -28,6 +35,7 @@ class Post(models.Model):
 
     class Meta:
         verbose_name_plural = 'posts'
+        ordering = ['-created_on']
 
     def __str__(self):
         return self.title

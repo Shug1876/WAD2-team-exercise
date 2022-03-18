@@ -4,7 +4,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'WAD2_team_exercise.settings')
 import django
 django.setup()
 
-from cycle_angelo.models import User, BlogPost, Comment
+from cycle_angelo.models import User, Post, Comment
 
 def populate():
     
@@ -23,7 +23,7 @@ def populate():
             add_comment(bp, c['content'])
     
     
-    for bp in BlogPost.objects.all():
+    for bp in Post.objects.all():
         for c in Comment.objects.filter(post=bp):
             print(f'- {bp} : {c}')
     
@@ -31,7 +31,7 @@ def populate():
 def add_post(bp):
 
     content = bp
-    bp = BlogPost.objects.get_or_create(content=content)[0]
+    bp = Post.objects.get_or_create(content=content)[0]
     bp.save()
     return bp
     
