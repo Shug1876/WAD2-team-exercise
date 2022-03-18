@@ -22,7 +22,7 @@
             alt="{{ selected_user.username }}'s profile picture" />
         <br />
         {% if selected_user == user %}
-        <form method="post" action"." enctype="multipart/form-data">
+        <form method="post" action="." enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
 

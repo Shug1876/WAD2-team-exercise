@@ -1,31 +1,26 @@
 {% extends 'cycle_angelo/base.html' %}
 {% load staticfiles %}
+
 {% block title_block %}
-Profile for {{ selected_user.username }}
+    Register - Set up your profile
 {% endblock %}
+
 {% block body_block %}
-<div class="jumbotron p-4">
-<div class="container">
-<h1 class="jumbotron-heading">{{ selected_user.username }}'s Profile</h1>
-</div>
-</div>
-<div class="container">
-<div class="row">
-<img src="{{ MEDIA_URL }}{{ user_profile.picture }}"
-width="300"
-height="300"
-alt="{{ selected_user.username }}'s profile image" />
-<br />
-<div>
-{% if selected_user == user %}
-<form method="post" action="." enctype="multipart/form-data">
-{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value="Update" />
-</form>
-{% else %}
-{% endif %}
-</div>
-</div>
-</div>
+ <div class="jumbotron p-4">
+     <div class="container">
+        <h1 class="jumbotron-heading">Register - Step 2</h1>
+    </div>
+ </div>
+
+ <div class="container">
+    <div class="row">
+        <form method="post"
+              action="{% url 'cycle_angelo:register_profile' %}"
+              enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Create Profile" />
+         </form>
+    </div>
+ </div>
 {% endblock %}
