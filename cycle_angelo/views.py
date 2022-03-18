@@ -139,11 +139,13 @@ def register_profile(request):
             user_profile.save()
 
             return redirect(reverse('cycle_angelo:index'))
+
         else:
             print(form.errors)
 
-        context_dict = {'form': form}
-        return render(request, 'cycle_angelo/profile_registration.html', context_dict)
+    context_dict = {'form': form}
+
+    return render(request, 'cycle_angelo/profile_registration.html', context_dict)
 
 
 def user_login(request):
