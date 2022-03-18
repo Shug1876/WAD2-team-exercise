@@ -22,16 +22,18 @@ from registration.backends.simple.views import RegistrationView
 from django.urls import reverse
 
 class MyRegistrationView(RegistrationView):
-    def get_success_url(self,user):
+    def get_success_url(self, user):
         return reverse('cycle_angelo:register_profile')
 
 urlpatterns = [
     path('', views.index, name='index'),
     path('cycle_angelo/', include('cycle_angelo.urls')),
     path('admin/', admin.site.urls),
-    path('accounts/register',
+
+    path('accounts/register/',
          MyRegistrationView.as_view(),
-         name='registration_register'),
+         name='registration_register')
+    
     path('accounts/', include('registration.backends.simple.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
