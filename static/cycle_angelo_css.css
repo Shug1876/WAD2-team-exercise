@@ -1,0 +1,88 @@
+        	body{
+        		background-color: #ced4de;
+        	}
+        	
+        	#header{
+        		display: block;
+        		height: 80px;
+        	}
+            #header h1{
+            	margin:  32.5%;
+            	font-size: 45px;
+                display: inline;
+            }
+            #home_icon{
+                display: inline;
+            	float: left;
+            	width: 75px;
+            	height: 75px;
+            }
+            #chainring_icon{
+                float: right;
+                width: 75px;
+                height: 75px;
+            }
+
+            #chain_line{
+            	display: block;
+            	height: 20px;
+            	width: 100%;
+            	background-image: url(images/chain_v2.png);
+                background-repeat: repeat-x;
+            }
+
+            #sub_heading{
+            	display: block;
+            	margin: auto;
+            	font-size: 20px;
+            	text-align: center;
+            }
+            h2{
+            	font-size: 25px;
+            }
+            #side_bar{
+            	display: block;
+            	float: left;
+            	width: 20%;
+            	height: 80vh;
+            	background-color: #59e3ff;
+                
+            }
+            #side_bar ul{
+                list-style-type: none;
+
+            }
+            #side_bar ul li{
+            	margin-top: 20px;
+            	margin-bottom: 50px;
+                font-size: 20px;
+
+            }
+            #body_block{
+            	display: block;
+                width: 78%;
+                height: 80vh;
+                margin-left: 22%;
+                background-color: #59e3ff;
+            }
+            
+
+        #posts{
+            width: 50%;
+            display: inline;
+            float:  left;
+
+            
+        }
+        #posts ul {
+            
+            height: 60vh;
+            overflow-y: scroll;
+            background-color: #34a1eb ;
+            width: 75%;
+        }
+        #posts ul li{
+            list-style-type: none;
+            font-size: 23px;
+            margin-bottom: 12px;
+        }
