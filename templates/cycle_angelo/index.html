@@ -26,9 +26,11 @@
 <div id="posts">
     <h2>Top Posts on Cycle Angelo:</h2>
 	<ul>
-        {% for post in posts %}
+        {% for post in top_posts %}
             <li>
-            <a href="{% url 'cycle_angelo:show_post' post.slug %}">{{post.creator}} says: {{ post.content }}</a>
+            {{post.creator}} says: <a href="{% url 'cycle_angelo:show_post' post.slug %}">{{ post.title }}</a>
+            <br />
+            <p>{{ post.content }}</p>
             </li>
         {% endfor %}
     </ul>
@@ -36,9 +38,11 @@
 <div id="posts">
 	<h2>New Posts on Cycle Angelo:</h2>
 	<ul>
-        {% for post in posts %}
+        {% for post in new_posts %}
             <li>
-            <a href="{% url 'cycle_angelo:show_post' post.slug %}">{{post.creator}} says: {{ post.content }}</a>
+             {{post.creator}} says: <a href="{% url 'cycle_angelo:show_post' post.slug %}">{{ post.title }}</a>
+            <br />
+            <p>{{ post.content }}</p>
             </li>
         {% endfor %}
     </ul>

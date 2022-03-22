@@ -15,13 +15,15 @@ def index(request):
     context_dict = {}
 
     # Get top 5 posts
-    post_list = Post.objects.order_by('-likes')[:5]
+    top_post_list = Post.objects.order_by('-likes')[:5]
+    new_post_list = Post.objects.order_by('-created_on')
 
     # Get visits
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
 
-    context_dict['posts'] = post_list
+    context_dict['new_posts'] = new_post_list
+    context_dict['top_posts'] = top_post_list
 
     return render(request, 'cycle_angelo/index.html', context=context_dict)
 
@@ -194,9 +196,12 @@ class ProfileView(View):
         except TypeError:
             return redirect(reverse('cycle_angelo:index'))
 
+        post_list = Post.objects.all()
+
         context_dict = {'user_profile': user_profile,
                         'selected_user': user,
-                        'form': form}
+                        'form': form,
+                        'posts': post_list}
 
         return render(request, 'cycle_angelo/profile.html', context_dict)
 

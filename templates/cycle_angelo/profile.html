@@ -4,6 +4,7 @@
 
 <html>
     <head>
+
 	
         {% block title_block %}
             Profile for {{ selected_user.username }}
@@ -16,18 +17,39 @@
             {{ selected_user.username }}'s Profile
         {% endblock %}
 
+    {% block body_block %}
+    <div id ="profile_picture">
         <img src="{{ MEDIA_URL }}{{ user_profile.picture }}"
             width ="300"
             height="200"
             alt="{{ selected_user.username }}'s profile picture" />
-        <br />
-        {% if selected_user == user %}
-        <form method="post" action="." enctype="multipart/form-data">
+
+{% if selected_user == user %}
+        <form id ="profile_picture" method="post" action="." enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
 
             <input type="submit" value="Update" />
         </form>
         {% endif %}
+
+    </div> 
+    <div id="posts">
+    <h2>Your Posts:</h2>
+    <ul>
+        {% for post in posts %}
+
+        {% if post.creator == user %}
+            <li>
+            <a href="{% url 'cycle_angelo:show_post' post.slug %}">{{ post.title }}</a>
+            <br />
+            <p>{{ post.content }}</p>
+            </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+        
+    {% endblock %}
     </body>
 </html>
