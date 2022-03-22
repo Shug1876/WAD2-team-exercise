@@ -1,5 +1,6 @@
 from django.urls import path, include
 from cycle_angelo import views
+from cycle_angelo.models import User
 
 app_name = 'cycle_angelo'
 

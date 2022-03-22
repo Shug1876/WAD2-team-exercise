@@ -3,7 +3,6 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
-from cycle_angelo.models import UserProfile
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.utils.decorators import method_decorator
@@ -36,7 +35,9 @@ def add_post(request):
 
         if form.is_valid:
 
-            form.save(commit=True)
+            post = form.save(commit=False)
+            post.creator = request.user
+            post.save()
 
             return redirect('/cycle_angelo/')
         else:
