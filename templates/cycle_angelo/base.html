@@ -8,7 +8,7 @@
 
         <meta charset="UTF-8" />
         <title>
-            Cycle Angelo - 
+            Cycle Angelo -
             {% block title_block %}
                 Base Template
             {% endblock %}
@@ -18,7 +18,7 @@
     </head>
     <body>
         <div id="header">
-    		
+
             <a href= "{% url 'cycle_angelo:index' %}">
     		<img src="{% static 'images/house_and_bike.png' %}" id="home_icon" alt="Home" />
         </a>
@@ -26,20 +26,20 @@
             <img src="{% static 'images/chainring.png' %}" id="chainring_icon" alt="Chainring" />
 
     	</div>
-    	    
+
     	<div id ="chain_line">
-    		
+
     	</div>
     	<div id="sub_heading">
             <h2>
-                 
+
     		    {% block sub_heading%}
                     Base Template
     		    {% endblock %}
             </h2>
       	</div>
         <div>
-        
+
         </div>
         <div id="side_bar">
             <ul>
@@ -52,14 +52,14 @@
                     <li><a href="{% url 'auth_login' %}">Login</a></li>
                 {% endif %}
                     <li><a >View Posts</a></li>
-                    <li><a >Contact Us</a></li>
+                    <li><a href="{% url 'cycle_angelo:contact_us' %}">Contact Us</a></li>
                     <li><a >Search</a></li>
             </ul>
         </div>
 
         <div id="body_block">
            {% block body_block %}
-        {% endblock %} 
+        {% endblock %}
 
         </div>
 

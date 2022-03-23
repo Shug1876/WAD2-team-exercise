@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% extends 'cycle_angelo/base.html' %}
+{% load staticfiles %}
+
+<html>
+
+<head>
+
+{% block title_block %}
+    Contact us!
+{% endblock %}
+
+</head>
+
+<body>
+	{% block sub_heading %}
+	{% if user.is_authenticated %}
+	  Contact us, {{ user.username }}!
+  {% else %}
+    Contact us!
+	{% endif %}
+
+	{% endblock %}
+
+  {% block body_block %}
+  <div>
+    <h1>Thank you for visiting our page! Here are the creators:</h1>
+    <ul>
+        <li>Adam Templeton</li>
+          <ul><li>2567437t@student.gla.ac.uk</li></ul>
+        <li>Nile Inel</li>
+          <ul><li>2555713i@student.gla.ac.uk</li></ul>
+        <li>Lucas Clement</li>
+          <ul><li>2745633c@student.gla.ac.uk</li></ul>
+        <li>Hamish Clark</li>
+          <ul><li>2549100c@student.gla.ac.uk</li></ul>
+
+    </ul>
+  </div>
+  {% endblock %}
+</body>
+</html>

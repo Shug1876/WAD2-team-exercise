@@ -27,6 +27,11 @@ def index(request):
 
     return render(request, 'cycle_angelo/index.html', context=context_dict)
 
+def contact_us(request):
+    context_dict = {}
+
+    return render(request, 'cycle_angelo/contact_us.html', context=context_dict)
+
 
 @login_required
 def add_post(request):
