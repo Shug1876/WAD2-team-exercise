@@ -23,10 +23,9 @@ class Post(models.Model):
         related_name='posts',
         editable=False)
     created_on = models.DateTimeField(auto_now_add=True)
-    picture = models.ImageField(upload_to='blog_post_images', blank=True)
+    number_of_comments = models.IntegerField(default=0)
 
     title = models.CharField(max_length=TITLE_MAX_LENGTH, default="[No post title]")
-    likes = models.IntegerField(default=0)
     slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):

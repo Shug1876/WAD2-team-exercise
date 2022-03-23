@@ -14,6 +14,14 @@
 
 <body>
 
+	{% block sub_heading %}
+
+	Add a comment!
+
+	{% endblock %}
+
+
+
 {% block body_block %}
 	<form id="comment_form" method="post" action="{% url 'cycle_angelo:add_comment' post.slug %}">
 

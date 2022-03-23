@@ -15,31 +15,46 @@
 </head>
 
 <body>
+
+	{% block sub_heading %}
+
+	Welcome to {{post.creator}}'s new post!
+
+
+	{% endblock %}
+
+
+
 	{% block body_block %}
-	<div>
+	<div id="posts">
 		{% if post %}
-			{% if post.content %}
-		    	<h1>{{ post.content }}</h1>
-			{% endif %}
-			{% if post.image %}
-				<img src="{{ MEDIA_URL }}{{ post.image }}"
-				width ="300"
-				height="200"
-				alt="{{ post.creator }}'s image for the post" />
-			{% endif %}
+			<br />
+		    	<h2 id="post_title"><u>{{ post.title }}</u></h1>
+		    	<p id="post_content">{{ post.content }}</p>
+
+
+</div>
+
+<div id="posts">
+
+
 		    {% if comments %}
-		        <h2><u>Comments</u></h2>
-		        <ul>
+		    <br />
+		        <h2 id="comment_title"><u>Comments</u></h2>
+		        {% if user.is_authenticated %}
+		        <a href="{% url 'cycle_angelo:add_comment' post.slug %}" id="comment_link">Add Comment</a> <br/>
+		    {% endif %}
+		    
+		        <ul id="post_comments">
 		        	{% for comment in comments %}
 		        	<li>{{ comment.content }}</li>
 		        	{% endfor %}
+		        	
 		        </ul>
 		    {% else %}
 		        <strong> No comments currently on this post.</strong>
 		    {% endif %}
-		    {% if user.is_authenticated %}
-		    <a href="{% url 'cycle_angelo:add_comment' post.slug %}">Add Comment</a> <br/>
-		    {% endif %}
+		    
 		{% else %}
 		    The post you are looking for does not exist.
 			<a href="{% url 'cycle_angelo:index' %}">Return to the home page</a>

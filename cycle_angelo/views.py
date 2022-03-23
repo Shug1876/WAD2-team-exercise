@@ -15,7 +15,7 @@ def index(request):
     context_dict = {}
 
     # Get top 5 posts
-    top_post_list = Post.objects.order_by('-likes')[:5]
+    top_post_list = Post.objects.order_by('-number_of_comments')[:5]
     new_post_list = Post.objects.order_by('-created_on')
 
     # Get visits
@@ -65,6 +65,8 @@ def add_comment(request, post_name_slug):
 
         if form.is_valid:
             if post:
+                post.number_of_comments += 1
+                post.save()
                 comment = form.save(commit=False)
                 comment.post = post
                 comment.save()
