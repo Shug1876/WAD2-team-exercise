@@ -28,9 +28,10 @@
 	<ul>
         {% for post in top_posts %}
             <li>
-            {{post.creator}} says: <a href="{% url 'cycle_angelo:show_post' post.slug %}">{{ post.title }}</a>
+            <b>{{post.creator}} says:</b> <a href="{% url 'cycle_angelo:show_post' post.slug %}">{{ post.title }}</a>
             <br />
             <p>{{ post.content }}</p>
+            <p>Number of Comments: {{ post.number_of_comments }}</p>
             </li>
         {% endfor %}
     </ul>
@@ -40,7 +41,7 @@
 	<ul>
         {% for post in new_posts %}
             <li>
-             {{post.creator}} says: <a href="{% url 'cycle_angelo:show_post' post.slug %}">{{ post.title }}</a>
+             <b>{{post.creator}} says:</b> <a href="{% url 'cycle_angelo:show_post' post.slug %}">{{ post.title }}</a>
             <br />
             <p>{{ post.content }}</p>
             </li>
