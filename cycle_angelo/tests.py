@@ -53,13 +53,14 @@ class IndexViewTests(TestCase):
         add_post('Morning!', 'Lovely ride along the Kelvin', 'Adam', 2)
         add_post('Biking', 'good places to ride?', 'Nile', 5)
         add_post('Gears', 'need new gears', 'Hamish', 1)
-        add_post('Howdy!', 'Wroong app!', 'Rango', 7)
+        add_post('Howdy!', 'Wrong app!', 'Rango', 7)
 
-        rankings = ['<Post: I love bikes>', '<Post: Howdy!>', '<Post: Biking>',
-                    '<Post: Morning!>', '<Post: Gears>']
+        rankings = ['<Post: Lucas>', '<Post: Rango>', '<Post: Nile>',
+                    '<Post: Adam>', '<Post: Hamish>']
 
         response = self.client.get(reverse('cycle_angelo:index'))
         self.assertEqual(response.status_code, 200)
+        print(response.context)
         self.assertQuerysetEqual(response.context['top_posts'], rankings)
 
     def test_five_new_posts(self):
@@ -72,15 +73,15 @@ class IndexViewTests(TestCase):
         add_post('Gears', 'need new gears', 'Hamish', 1)
         add_post('Howdy!', 'Wroong app!', 'Rango', 7)
 
-        rankings = ['<Post: Howdy!>', '<Post: Gears>', '<Post: Biking>',
-                    '<Post: Morning!>', '<Post: I love bikes>']
+        rankings = ['<Post: Rango>', '<Post: Hamish>', '<Post: Nile>',
+                    '<Post: Adam>', '<Post: Lucas>']
 
         response = self.client.get(reverse('cycle_angelo:index'))
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(response.context['new_posts'], rankings)
 
 
-def add_post(title, content, name, comments=0):
+def add_post(content, name, title='', comments=0):
     creator = User(username=name)
     creator.save()
     post = Post.objects.get_or_create(title=title, content=content,
@@ -89,13 +90,20 @@ def add_post(title, content, name, comments=0):
     return post
 
 
-class AddPostViewTests(TestCase):
+class ShowPostViewTests(TestCase):
     '''
-    test to make sure Posts can be added properly
+    test to make sure Posts are shown correctly
     check for with and without title
     check content is present
-    if photos work
-    slug?
+    check comments
+    '''
+    '''
+    def test_post_no_title(self):
+        add_post(content="hello", name='Lucas')
+        response = self.client.get(reverse('cycle_angelo:show_post'))
+        not sure how to access the exact post I created for the test.
+
+        self.assertEqual(response.status_code, 200)
     '''
 
     pass
