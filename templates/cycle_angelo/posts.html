@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% extends 'cycle_angelo/base.html' %}
+{% load staticfiles %}
+
+<html>
+
+<head>
+	{% block title %}
+		{% if post %}
+			{{post.creator}}'s Post
+		{% else %}
+			Unknown Post
+		{% endif %}
+	{% endblock %}
+</head>
+
+<body>
+
+	{% block sub_heading %}
+
+	Posts on Cycle Angelo
+
+
+	{% endblock %}
+
+
+
+	{% block body_block %}
+	<div id="posts">
+		{% if post %}
+			<br />
+		    	<h2 id="post_title"><u>{{ post.title }}</u></h1>
+		    	<p id="post_content">{{ post.content }}</p>
+
+
+    </div>
+
+
+	{% endblock %}
+</body>
+</html>
