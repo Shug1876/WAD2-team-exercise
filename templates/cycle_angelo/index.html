@@ -13,42 +13,75 @@
 </head>
 
 <body>
-	{% block sub_heading %}
-	{% if user.is_authenticated %}
-	{{ user.username }}'s
-	{% endif %}
-		Home Page
-	{% endblock %}
-	
+    {% block sub_heading %}
+	<div class="jumbotron p-4">
+        <div class="container">
+        <h1 class="jumbotron-heading">
+            {% if user.is_authenticated %}
+            Welcome back, {{ user.username }}!
+            {% else %}
+            Welcome to Cycle Angelo!
+            {% endif %}</h1>
+        </div>
+    </div>
 
+	{% endblock %}
 
 {% block body_block %}
-<div id="posts">
-    <h2>Top Posts on Cycle Angelo:</h2>
-	<ul>
-        {% for post in top_posts %}
-            <li>
-            <b>{{post.creator}} says:</b> <a href="{% url 'cycle_angelo:show_post' post.slug %}">{{ post.title }}</a>
-            <br />
-            <p>{{ post.content }}</p>
-            <p>Number of Comments: {{ post.number_of_comments }}</p>
-            </li>
-        {% endfor %}
-    </ul>
-</div>
-<div id="posts">
-	<h2>New Posts on Cycle Angelo:</h2>
-	<ul>
-        {% for post in new_posts %}
-            <li>
-             <b>{{post.creator}} says:</b> <a href="{% url 'cycle_angelo:show_post' post.slug %}">{{ post.title }}</a>
-            <br />
-            <p>{{ post.content }}</p>
-            </li>
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <div class="row">
+            <div id="index_posts" class="col-md-6">
+                <div class="card mb-6">
+                    <div class="card-body">
+                    <h2>Top Posts on Cycle Angelo</h2>
+                    <p class="card-text">
+                        {% if top_posts %}
+                        <ul>
+                            {% for post in top_posts %}
+                                <li>
+                                <b>{{post.creator}} says:</b> <a href="{% url 'cycle_angelo:show_post' post.slug %}">{{ post.title }}</a>
+                                <br />
+                                <p>{{ post.content }}</p>
+                                <p>Number of Comments: {{ post.number_of_comments }}</p>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <strong>There are no posts to display.</strong>
+                        {% endif %}
+                    </p>
 
+                    </div>
+                </div>
+            </div>
+
+        <div id="index_posts" class="col-md-6">
+            <div class="card mb-6">
+                <div class="card-body">
+                <h2>All Posts on Cycle Angelo</h2>
+                <p class="card-text">
+                    {% if top_posts %}
+                        <ul>
+                            {% for post in new_posts %}
+                                <li>
+                                <b>{{post.creator}} says:</b> <a href="{% url 'cycle_angelo:show_post' post.slug %}">{{ post.title }}</a>
+                                <br />
+                                <p>{{ post.content }}</p>
+                                <p>Number of Comments: {{ post.number_of_comments }}</p>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <strong>There are no posts to display.</strong>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+            </div>
+        </div>
 </div>
+
 {% endblock %}
+
 </body>
 </html>
