@@ -122,3 +122,16 @@
             margin-left: 33%;
             text-align: center;
         }
+
+        /*For login page*/
+        #id_username{
+            width: 50%;
+        }
+
+        #id_password{
+            width: 50%;
+        }
+
+        #login_btn{
+            width: 50%
+        }

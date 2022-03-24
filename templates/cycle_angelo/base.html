@@ -1,66 +1,159 @@
 <!DOCTYPE html>
 {% load staticfiles %}
 
-<html>
-    <head lang="en">
 
-<link rel="stylesheet" type ='text/css' href="{% static 'cycle_angelo_css.css' %}">
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
 
-        <meta charset="UTF-8" />
-        <title>
-            Cycle Angelo -
-            {% block title_block %}
-                Base Template
-            {% endblock %}
-        </title>
+    <link rel="icon" href="{% static 'images/house_and_bike.png' %}">
+    <title> Cycle Angelo </title>
 
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/4.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="https://getbootstrap.com/docs/4.2/examples/dashboard/dashboard.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+        <link rel="stylesheet" type ='text/css' href="{% static 'cycle_angelo_css.css' %}">
 
     </head>
+
     <body>
-        <div id="header">
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                    <div class="sidebar-sticky">
+                        {% block sidebar_block %}
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="{% url 'cycle_angelo:index' %}">
+                                        <span data-feather="home"></span>
+                                        Home
+                                    </a>
+                                </li>
+                            </ul>
 
-            <a href= "{% url 'cycle_angelo:index' %}">
-    		<img src="{% static 'images/house_and_bike.png' %}" id="home_icon" alt="Home" />
-        </a>
-    		<h1>Cycle Angelo</h1>
-            <img src="{% static 'images/chainring.png' %}" id="chainring_icon" alt="Chainring" />
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="{% url 'cycle_angelo:contact_us' %}">
+                                        <span data-feather="phone"></span>
+                                        Contact Us
+                                    </a>
+                                </li>
+                            </ul>
 
-    	</div>
 
-    	<div id ="chain_line">
+                            {% if user.is_authenticated %}
+                            <li class="divider"></li>
 
-    	</div>
-    	<div id="sub_heading">
-            <h2>
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="{% url 'cycle_angelo:add_post' %}">
+                                        <span data-feather="file-minus"></span>
+                                        Create a post
+                                    </a>
+                                </li>
+                            </ul>
 
-    		    {% block sub_heading%}
-                    Base Template
-    		    {% endblock %}
-            </h2>
-      	</div>
-        <div>
+                            <li class="divider"></li>
 
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="{% url 'cycle_angelo:profile' user.username %}">
+                                        <span data-feather="user"></span>
+                                        My Profile
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="{% url 'auth_password_change' %}">
+                                        <span data-feather="unlock"></span>
+                                        Change Password
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="{% url 'auth_logout' %}?next={% url 'cycle_angelo:index' %}">
+                                        <span data-feather="log-out"></span>
+                                        Log out
+                                    </a>
+                                </li>
+                            </ul>
+                            {% else %}
+
+                            <li class="divider"></li>
+
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="{% url 'auth_login' %}">
+                                        <span data-feather="log-in"></span>
+                                        Log In
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="{% url 'registration_register' %}">
+                                        <span data-feather="file-text"></span>
+                                        Register
+                                    </a>
+                                </li>
+                            </ul>
+
+                            {% endif %}
+
+
+                        {% endblock %}
+                    </div>
+                </nav>
+
+                <main role="main" class="col-md-9  ml-sm-auto col-lg-10 px-4">
+                    <header>
+                    <nav class="navbar navbar-light shadow mb-4 topbar static-top" style="background-color: #aacaf0">
+                    <div class="container-fluid"><button class="btn btn-link link-primary d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button><img src="{% static 'images/house_and_bike.png' %}" width="50" height="50"><span class="fs-2 text-dark"><h1>Cycle Angelo</h1></span><img src="{% static 'images/chainring.png' %}" width="50" height="50"></div>
+                    </nav>
+                    <div id ="chain_line"></div>
+                    </header>
+
+                    <div>
+
+                     <h2 id="sub_heading">
+                         {% block sub_heading %}
+                         <h1 class="jumbotron-heading">Base Template </h1>
+                         {% endblock %}
+                     </h2>
+
+                    </div>
+                    <div id="body_block">
+                        {% block body_block %}
+                        {% endblock %}
+                    </div>
+"
+
+
+                    <!-- FOOTER -->
+                    <footer class="bg-white sticky-footer">
+                    <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>@ Cycle Angelo 2022</span></div>
+                    </div>
+                    </footer>
+
+                </main>
+            </div>
         </div>
-        <div id="side_bar">
-            <ul>
-                {% if user.is_authenticated %}
-                    <li class="nav-item"> <a class="nav-link" href="{% url 'cycle_angelo:profile' user.username %}">View Profile</a></li>
-                    <li><a href="{% url 'cycle_angelo:add_post' %}">Create a post</a></li>
-                    <li><a href="{% url 'auth_logout' %}?next={% url 'cycle_angelo:index' %}">Logout</a></li>
-                {% else %}
-                    <li><a href="{% url 'registration_register' %}">Sign Up</a></li>
-                    <li><a href="{% url 'auth_login' %}">Login</a></li>
-                {% endif %}
-                    <li><a href="{% url 'cycle_angelo:contact_us' %}">Contact Us</a></li>
-            </ul>
-        </div>
 
-        <div id="body_block">
-           {% block body_block %}
-        {% endblock %}
-
-        </div>
-
-
+        <!-- Bootstrap core JavaScript -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script>window.jQuery || document.write('<script src="https://getbootstrap.com/docs/4.2/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="https://getbootstrap.com/docs/4.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+        <script src="https://getbootstrap.com/docs/4.2/examples/dashboard/dashboard.js"></script>
     </body>
 </html>
