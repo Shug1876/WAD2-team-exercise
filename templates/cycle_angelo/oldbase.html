@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Cycle Angelo</title>
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" type ='text/css' href="{% static 'cycle_angelo_css.css' %}">
+</head>
+
+<body id="page-top">
+
+    <div id="wrapper">
+
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                 <!-- Sidebar -->
+                <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+                    <div class="position-sticky">
+                        <div class="list-group list-group-flush mx-3 mt-4">
+                             <a
+                              href="{% url 'cycle_angelo:index' %}"
+                              class="list-group-item list-group-item-action py-2 ripple"
+                              aria-current="true">
+                            <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Home</span>
+                             </a>
+
+                            <a href="{% url 'cycle_angelo:contact_us' %}" class="list-group-item list-group-item-action py-2 ripple active">
+                            <i class="fas fa-chart-area fa-fw me-3"></i><span>Contact us</span>
+                            </a>
+
+                            {% if user.is_authenticated %}
+                               <a href="{% url 'cycle_angelo:add_post' %}" class="list-group-item list-group-item-action py-2 ripple active">
+                            <i class="fas fa-chart-area fa-fw me-3"></i><span>Create a post</span>
+                            </a>
+
+                            <a href="{% url 'cycle_angelo:profile' user.username %}" class="list-group-item list-group-item-action py-2 ripple active">
+                            <i class="fas fa-chart-area fa-fw me-3"></i><span>Profile</span>
+                            </a>
+
+                            <a href="{% url 'auth_logout' %}?next={% url 'cycle_angelo:index' %}" class="list-group-item list-group-item-action py-2 ripple active">
+                            <i class="fas fa-chart-area fa-fw me-3"></i><span>Log out</span>
+                            </a>
+
+                            {% else %}
+                            <a href="{% url 'auth_login' %}" class="list-group-item list-group-item-action py-2 ripple active">
+                            <i class="fas fa-chart-area fa-fw me-3"></i><span>Log in</span>
+                            </a>
+
+                            <a href="{% url 'registration_register' %}" class="list-group-item list-group-item-action py-2 ripple active">
+                            <i class="fas fa-chart-area fa-fw me-3"></i><span>Register</span>
+                            </a>
+
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </nav>
+
+                <main style="margin-top: 58px;">
+
+                <div class="container pt-20">
+                    <nav class="navbar navbar-light navbar-expand bg-primary shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link link-primary d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button><img src="{% static 'images/house_and_bike.png' %}" width="50" height="50"><span class="fs-2 text-light">Cycle Angelo</span><img src="{% static 'images/chainring.png' %}" width="50" height="50"></div>
+                    </nav>
+
+                    <div id ="chain_line"></div>
+                    <div>
+                                <h2 id="sub_heading">
+                                {% block sub_heading %}
+                                 Base Template
+    		                    {% endblock %}
+                                </h2>
+                    </div>
+
+                    <div id ="body_block">
+                                {% block body_block %}
+                                {% endblock %}
+                    </div>
+
+                </div>
+                </main>
+
+            </div>
+
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Cycle Angelo</span></div>
+                </div>
+            </footer>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{% static 'equal_col.js' %}"></script>
+
+</body>
+
+</html>

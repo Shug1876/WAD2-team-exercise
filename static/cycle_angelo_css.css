@@ -13,6 +13,7 @@
                 background-repeat: repeat-x;
             }
 
+            .navbar
             .sidebar {
                 position: fixed;
                 top: 0;
@@ -22,6 +23,7 @@
                 box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
                 width: 180px;
                 z-index: 600;
+                background-color: #aacaf0;
             }
 
             @media (min-width: 768px) {
@@ -49,34 +51,34 @@
                 padding: 2em 2em 2em 2em;
             	display: block;
             	margin: auto;
-            	font-size: 20px;
+                font-size: 25px;
+                background-color: #aacaf0;
             }
-
-            h2{
-            	font-size: 25px;
-            }
-
-            #space{
+        #body_block{
+            background-color: #aacaf0;
+            padding: 2em 2em 2em 2em;
+        }
+        #space{
                 padding: 2em 2em 2em 2em;
             }
 
-        #posts{
-            width: 80%;
+        #index_posts{
+            width: 75%;
             display: inline;
             float:  left;
         }
 
-        #posts ul {
+        #index_posts ul {
 
             height: 40vh;
             overflow-y: scroll;
-            background-color: #ffffff ;
+            background-color: #fbfbfb ;
             width: 75%;
         }
 
-        #posts ul li{
+        #index_posts ul li{
             list-style-type: none;
-            font-size: 23px;
+            font-size: 13px;
             margin-bottom: 5px;
         }
 
@@ -85,6 +87,7 @@
         #profile_picture {
             display: inline;
             float: right;
+            height: 50%;
             width: 50%;
             float: left;
         }
