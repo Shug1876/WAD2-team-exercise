@@ -84,17 +84,14 @@
 
         /*For profile page*/
 
-        #profile_picture {
+        #profile_image {
             display: inline;
             float: right;
             width: 50%;
             float: left;
         }
 
-        #profile_picture img{
-            margin-left: 10px ;
-            margin-top: 10px ;
-            margin-bottom: 10px ;
+        #profile_img{
             height: 10vh;
             width: 10vh;
         }
@@ -130,5 +127,7 @@
             text-align: center;
         }
 
-        /*For add post page*/
-
+        /*For login page*/
+        #login_input{
+            align-self: flex-start;
+        }
