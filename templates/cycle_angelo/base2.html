@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+    <head lang="en">
+
+<link rel="stylesheet" type ='text/css' href="{% static 'cycle_angelo_css.css' %}">
+
+        <meta charset="UTF-8" />
+        <title>
+            Cycle Angelo -
+            {% block title_block %}
+                Base Template
+            {% endblock %}
+        </title>
+
+
+    </head>
+    <body>
+        <div id="header">
+
+            <a href= "{% url 'cycle_angelo:index' %}">
+    		<img src="{% static 'images/house_and_bike.png' %}" id="home_icon" alt="Home" />
+        </a>
+    		<h1>Cycle Angelo</h1>
+            <img src="{% static 'images/chainring.png' %}" id="chainring_icon" alt="Chainring" />
+
+    	</div>
+
+    	<div id ="chain_line">
+
+    	</div>
+    	<div id="sub_heading">
+            <h2>
+
+    		    {% block sub_heading %}
+                    Base Template
+    		    {% endblock %}
+            </h2>
+      	</div>
+        <div>
+
+        </div>
+        <div id="side_bar">
+            <ul>
+                {% if user.is_authenticated %}
+                    <li class="nav-item"> <a class="nav-link" href="{% url 'cycle_angelo:profile' user.username %}">View Profile</a></li>
+                    <li><a href="{% url 'cycle_angelo:add_post' %}">Create a post</a></li>
+                    <li><a href="{% url 'auth_logout' %}?next={% url 'cycle_angelo:index' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'registration_register' %}">Sign Up</a></li>
+                    <li><a href="{% url 'auth_login' %}">Login</a></li>
+                {% endif %}
+                    <li><a href="{% url 'cycle_angelo:contact_us' %}">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <div id="body_block">
+           {% block body_block %}
+        {% endblock %}
+
+        </div>
+
+
+    </body>
+</html>

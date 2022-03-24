@@ -4,31 +4,6 @@
             body{
         		background-color: #ced4de;
         	}
-        	
-        	#header{
-        		display: block;
-        		height: 80px;
-        	}
-
-            #header h1{
-            	margin:  32.5%;
-            	font-size: 45px;
-                display: inline;
-            }
-
-            #home_icon{
-                display: inline;
-            	float: left;
-            	width: 75px;
-            	height: 75px;
-            }
-
-            #chainring_icon{
-                float: right;
-                width: 75px;
-                height: 75px;
-            }
-
 
             #chain_line{
             	display: block;
@@ -38,59 +13,64 @@
                 background-repeat: repeat-x;
             }
 
+            .sidebar {
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                padding: 58px 0 0; /* Height of navbar */
+                box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+                width: 180px;
+                z-index: 600;
+            }
+
+            @media (min-width: 768px) {
+                .main {
+            padding-right: 40px;
+            padding-left: 220px; /* 180 + 40 */
+                }
+            }
+
+            .sidebar .active {
+                border-radius: 5px;
+                box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+            }
+
+            .sidebar-sticky {
+                position: relative;
+                top: 0;
+                height: calc(100vh - 48px);
+                padding-top: 0.5rem;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
 
             #sub_heading{
+                padding: 2em 2em 2em 2em;
             	display: block;
             	margin: auto;
             	font-size: 20px;
-            	text-align: center;
             }
 
             h2{
             	font-size: 25px;
             }
 
-            #side_bar{
-            	display: block;
-            	float: left;
-            	width: 20%;
-            	height: 80vh;
-            	background-color: #59e3ff;
-                
+            #space{
+                padding: 2em 2em 2em 2em;
             }
-
-            #side_bar ul{
-                list-style-type: none;
-
-            }
-
-            #side_bar ul li{
-            	margin-top: 20px;
-            	margin-bottom: 50px;
-                font-size: 20px;
-
-            }
-
-            #body_block{
-            	display: block;
-                width: 78%;
-                height: 80vh;
-                margin-left: 22%;
-                background-color: #59e3ff;
-            }
-            
 
         #posts{
-            width: 50%;
+            width: 80%;
             display: inline;
-            float:  left;   
+            float:  left;
         }
 
         #posts ul {
-            
-            height: 60vh;
+
+            height: 40vh;
             overflow-y: scroll;
-            background-color: #34a1eb ;
+            background-color: #ffffff ;
             width: 75%;
         }
 
@@ -98,10 +78,6 @@
             list-style-type: none;
             font-size: 23px;
             margin-bottom: 5px;
-        }
-
-        #posts ul li p{
-            font-size: 17px;
         }
 
         /*For profile page*/
@@ -123,7 +99,6 @@
         #post_content{
             font-size: 19px;
             margin-left: 25px;
-            background-color: #34a1eb ;
             height: 60vh;
             width: 75%;
         }
