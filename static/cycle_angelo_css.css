@@ -102,7 +102,13 @@
 
         /*For individual post page*/
 
-        #post_content{
+        #unique_post{
+            width: 50%;
+            height: 60vh;
+            display: inline-block;
+        }
+
+#post_content{
             font-size: 19px;
             margin-left: 25px;
             height: 60vh;
@@ -118,6 +124,12 @@
             margin-left: 25px;
         }
 
+        #unique_post_comments{
+            width: 50%;
+            display: inline;
+            float: right;
+
+        }
         #comment_title{
             display: inline;
             margin-top: 10%;
@@ -125,6 +137,7 @@
         #comment_link{
             margin-left: 33%;
             text-align: center;
+            display: block;
         }
 
         /*For login page*/
