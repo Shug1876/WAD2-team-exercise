@@ -52,39 +52,6 @@ def add_post(request):
 
     return render(request, 'cycle_angelo/add_post.html', {'form': form})
 
-
-@login_required
-def add_comment(request, post_name_slug):
-    try:
-        post = Post.objects.get(slug=post_name_slug)
-    except Post.DoesNotExist:
-        post = None
-
-    if (post == None):
-        return redirect('/cycle_angelo/')
-
-    form = CommentForm()
-
-    if request.method == 'POST':
-        form = CommentForm(request.POST)
-
-        if form.is_valid:
-            if post:
-                post.number_of_comments += 1
-                post.save()
-                comment = form.save(commit=False)
-                comment.post = post
-                comment.user = request.user
-                comment.save()
-
-                return redirect(reverse('cycle_angelo:show_post', kwargs={'post_name_slug': post_name_slug}))
-        else:
-            print(form.errors)
-
-    context_dict = {'form': form, 'post': post}
-    return render(request, 'cycle_angelo/add_comment.html', context=context_dict)
-
-
 def show_post(request, post_name_slug):
     context_dict = {}
 
@@ -99,6 +66,34 @@ def show_post(request, post_name_slug):
 
         context_dict['comments'] = None
         context_dict['post'] = None
+
+    try:
+        post = Post.objects.get(slug=post_name_slug)
+    except Post.DoesNotExist:
+        post = None
+
+    if (post == None):
+        return redirect('/cycle_angelo/')
+
+    form = CommentForm()
+    context_dict['form'] = form
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+
+
+        if form.is_valid:
+            if post:
+                post.number_of_comments += 1
+                post.save()
+                comment = form.save(commit=False)
+                comment.post = post
+                comment.user = request.user
+                comment.save()
+
+                return render(request,'cycle_angelo/post.html', context=context_dict)
+        else:
+            print(form.errors)
+    
 
     return render(request, 'cycle_angelo/post.html', context=context_dict)
 
