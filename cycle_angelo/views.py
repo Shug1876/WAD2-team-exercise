@@ -74,6 +74,7 @@ def add_comment(request, post_name_slug):
                 post.save()
                 comment = form.save(commit=False)
                 comment.post = post
+                comment.user = request.user
                 comment.save()
 
                 return redirect(reverse('cycle_angelo:show_post', kwargs={'post_name_slug': post_name_slug}))

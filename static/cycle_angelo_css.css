@@ -59,7 +59,7 @@
             padding: 2em 2em 2em 2em;
         }
         #space{
-                padding: 2em 2em 2em 2em;
+                padding: 1em 1em 1em 1em;
             }
 
         #index_posts{
@@ -84,21 +84,31 @@
 
         /*For profile page*/
 
-        #profile_picture {
+        #profile_image {
             display: inline;
             float: right;
             width: 50%;
             float: left;
         }
 
-        #profile_picture img{
-            margin-left: 10px ;
-            margin-top: 10px ;
+        #profile_img{
+            height: 10vh;
+            width: 10vh;
+        }
+
+        #user_post{
+            background-color: #ced4de;
         }
 
         /*For individual post page*/
 
-        #post_content{
+        #unique_post{
+            width: 50%;
+            height: 60vh;
+            display: inline-block;
+        }
+
+#post_content{
             font-size: 19px;
             margin-left: 25px;
             height: 60vh;
@@ -114,6 +124,12 @@
             margin-left: 25px;
         }
 
+        #unique_post_comments{
+            width: 50%;
+            display: inline;
+            float: right;
+
+        }
         #comment_title{
             display: inline;
             margin-top: 10%;
@@ -121,17 +137,10 @@
         #comment_link{
             margin-left: 33%;
             text-align: center;
+            display: block;
         }
 
         /*For login page*/
-        #id_username{
-            width: 50%;
-        }
-
-        #id_password{
-            width: 50%;
-        }
-
-        #login_btn{
-            width: 50%
+        #login_input{
+            align-self: flex-start;
         }
