@@ -153,5 +153,10 @@ class AddCommentViewTests(TestCase):
     empty comments
     '''
 
-    def test_add_comment(self):
-        pass
+    def test_add_comment_link_works(self):
+        post = add_post(content="Hi I'm new here!", name='Lucas')
+        url = reverse('cycle_angelo:add_comment', args=(post.slug,))
+        response = self.client.get(url)
+        print(response)
+
+        self.assertEqual(response.status_code, 200)
