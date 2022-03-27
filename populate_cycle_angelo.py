@@ -30,7 +30,7 @@ def populate():
 
 
 def add_post(bp):
-    creator = User(username=random.randint(1,100))
+    creator = User(username=random.randint(1,1000))
     creator.save()
     content = bp
     bp = Post.objects.get_or_create(content=content, creator=creator)[0]
@@ -38,7 +38,9 @@ def add_post(bp):
     return bp
 
 def add_comment(bp, content):
-    c = Comment.objects.get_or_create(post=bp, content=content)[0]
+    creator = User(username=random.randint(1,1000))
+    creator.save()
+    c = Comment.objects.get_or_create(post=bp, content=content, user=creator)[0]
     c.save()
     return c
 

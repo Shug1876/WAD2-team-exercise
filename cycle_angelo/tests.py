@@ -8,6 +8,7 @@ from django.test import TestCase
 from cycle_angelo.models import Post, User, Comment
 from django.urls import reverse
 import random
+from django.db import IntegrityError
 
 # Create your tests here.
 
@@ -67,14 +68,14 @@ class IndexViewTests(TestCase):
         '''
         Checks to make sure the order of the new posts are being shown correctly
         '''
-        add_post('I love bikes', 'Bikes are great', 'Lucas', 10)
-        add_post('Morning!', 'Lovely ride along the Kelvin', 'Adam', 2)
-        add_post('Biking', 'good places to ride?', 'Nile', 5)
-        add_post('Gears', 'need new gears', 'Hamish', 1)
-        add_post('Howdy!', 'Wroong app!', 'Rango', 7)
+        add_post(title='I love bikes', content='Bikes are great', name='Lucas', comments=10)
+        add_post(title='Morning!', content='Lovely ride along the Kelvin', name='Adam', comments=2)
+        add_post(title='Biking', content='good places to ride?', name='Nile', comments=5)
+        add_post(title='Gears', content='need new gears', name='HamishC', comments=1)
+        add_post(title='Howdy!', content='Wrong app!', name='Rango', comments=7)
 
-        rankings = ['<Post: Rango>', '<Post: Hamish>', '<Post: Nile>',
-                    '<Post: Adam>', '<Post: Lucas>']
+        rankings = ['<Post: Howdy!>', '<Post: Gears>', '<Post: Biking>',
+                    '<Post: Morning!>', '<Post: I love bikes>']
 
         response = self.client.get(reverse('cycle_angelo:index'))
         self.assertEqual(response.status_code, 200)
@@ -82,17 +83,29 @@ class IndexViewTests(TestCase):
 
 
 def add_post(content, name, title='', comments=0):
+
     creator = User(username=name)
+    if not creator.DoesNotExist:
+        creator = User(random.randint(1,1000))
     creator.save()
     post = Post.objects.get_or_create(title=title, content=content,
                                     creator=creator, number_of_comments=comments)[0]
     post.save()
     if comments > 0:
         for i in range(comments):
-            comment = Comment(post=post, content=random.randint(1,100))
-            comment.save()
-
+            comm = random.randint(1, 1000)
+            add_comment(post, comm)
     return post
+
+def add_comment(post, content):
+    creator = User(username=random.randint(1,1000))
+    if not creator.DoesNotExist:
+        creator = User(random.randint(1,1000))
+    creator.save()
+    c = Comment.objects.get_or_create(post=post, content=content, user=creator)[0]
+    c.save()
+    return c
+
 
 
 class ShowPostViewTests(TestCase):
@@ -145,18 +158,10 @@ class ShowPostViewTests(TestCase):
 
 
 
-
-
-class AddCommentViewTests(TestCase):
+class ProfileViewTests(TestCase):
     '''
-    tests to see if adding comments works
-    empty comments
+    Testing for viewing the ProfileView
     '''
 
-    def test_add_comment_link_works(self):
-        post = add_post(content="Hi I'm new here!", name='Lucas')
-        url = reverse('cycle_angelo:add_comment', args=(post.slug,))
-        response = self.client.get(url)
-        print(response)
-
-        self.assertEqual(response.status_code, 200)
+    def test_get_user_details(self):
+        pass
