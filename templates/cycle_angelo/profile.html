@@ -18,38 +18,57 @@
         {% endblock %}
 
     {% block body_block %}
-    <div id ="profile_picture">
-        <img src="{{ MEDIA_URL }}{{ user_profile.picture }}"
-            width ="300"
-            height="200"
-            alt="{{ selected_user.username }}'s profile picture" />
+        <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-6">
+                    <div class="card-body">
+                    <h2>Your profile picture:</h2>
+                    <p class="card-text">
+                    <img src="{{ MEDIA_URL }}{{ user_profile.picture }}"
+                    width ="100"
+                    height="100"
+                    alt="{{ selected_user.username }}'s profile picture" />
 
-{% if selected_user == user %}
-        <form id ="profile_picture" method="post" action="." enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
+                    {% if selected_user == user %}
+                    <form id ="profile_picture" method="post" action="." enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
 
-            <input type="submit" value="Update" />
-        </form>
-        {% endif %}
+                        <input type="submit" value="Update" />
+                    </form>
+                        </div>
+                    {% endif %}
+                    </p>
 
-    </div> 
-    <div id="posts">
-    <h2>Your Posts:</h2>
-    <ul>
-        {% for post in posts %}
+                    </div>
+                </div>
 
-        {% if post.creator == user %}
-            <li>
-            <a href="{% url 'cycle_angelo:show_post' post.slug %}">{{ post.title }}</a>
-            <br />
-            <p>{{ post.content }}</p>
-            </li>
-        {% endif %}
-        {% endfor %}
-    </ul>
-</div>
-        
+
+            <div id="index_posts" class="col-md-6">
+            <div class="card mb-6">
+                <div class="card-body">
+                <h2>Your posts:</h2>
+                <p class="card-text">
+                    <ul>
+                    {% for post in posts %}
+
+                    {% if post.creator == user %}
+                        <li>
+                        <a href="{% url 'cycle_angelo:show_post' post.slug %}">{{ post.title }}</a>
+                        <br />
+                        <p>{{ post.content }}</p>
+                        </li>
+                    {% endif %}
+                    {% endfor %}
+                    </ul>
+                    </p>
+                </div>
+            </div>
+            </div>
+            </div>
+        </div>
+
     {% endblock %}
     </body>
 </html>

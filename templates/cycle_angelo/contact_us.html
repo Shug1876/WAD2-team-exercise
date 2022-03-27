@@ -14,17 +14,11 @@
 
 <body>
 	{% block sub_heading %}
-	{% if user.is_authenticated %}
-	  Contact us, {{ user.username }}!
-  {% else %}
-    Contact us!
-	{% endif %}
-
+    Thank you for visiting our page! Here are the creators:
 	{% endblock %}
 
   {% block body_block %}
   <div>
-    <h1>Thank you for visiting our page! Here are the creators:</h1>
     <ul>
         <li>Adam Templeton</li>
           <ul>

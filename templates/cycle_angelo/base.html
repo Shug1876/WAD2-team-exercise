@@ -126,9 +126,15 @@
                     <div>
 
                      <h2 id="sub_heading">
-                         {% block sub_heading %}
-                         <h1 class="jumbotron-heading">Base Template </h1>
-                         {% endblock %}
+                            <div class="jumbotron p-4">
+                             <div class="container">
+                            <h1 class="jumbotron-heading">
+                                {% block sub_heading %}
+                                Base Template
+                                {% endblock %}
+                            </div>
+                            </div>
+
                      </h2>
 
                     </div>
@@ -136,7 +142,7 @@
                         {% block body_block %}
                         {% endblock %}
                     </div>
-"
+
 
 
                     <!-- FOOTER -->

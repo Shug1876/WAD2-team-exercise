@@ -17,62 +17,85 @@
 <body>
 
 	{% block sub_heading %}
-
-	Welcome to {{post.creator}}'s new post!
-
-
+		Welcome to {{post.creator}}'s new post!
 	{% endblock %}
 
 
 
 	{% block body_block %}
-	<div id="unique_post">
-		{% if post %}
-			<br />
-		    	<h2 id="post_title"><u>{{ post.title }}</u></h1>
-		    	<p id="post_content">{{ post.content }}</p>
+	<div class="container mt-5">
+    <div class="row" style="background-color: #fbfbfb">
+        <div class="col-lg-8">
+            <!-- Post content-->
+            {% if post %}
+            <article id="post_content">
+                <!-- Post header-->
+                <header class="mb-4">
+                    <!-- Post title-->
+                    <h1 id="post_title" class="fw-bolder mb-1">{{ post.title }}</h1>
+                    <!-- Post meta content-->
+                    <div class="text-muted fst-italic mb-2">Posted by {{ post.creator }} on {{ post.created_on }}</div>
+                </header>
 
+                <!-- Post content-->
+                <section class="mb-5">
+                    <p class="fs-5 mb-4">{{ post.content }}</p>
+                </section>
 
-</div>
+            </article>
 
-<div id="unique_post_comments">
+            <!-- Comments section-->
+            <section class="mb-5">
+                <div id="comments" class="card bg-light">
+                    <div class="card-body">
+                        <!-- Comments -->
+						<header>
+							<h1>Comments</h1>
+						</header>
+                        {% if comments %}
 
+                            {% for comment in comments %}
+                            <div class="d-flex">
+                                <div id="comment_content" class="ms-3" >
+                                    <p id="space"></p>
+                                    <div class="fw-bold"><h3>{{ comment.user }}</h3> replied on {{ comment.created_on }}</div>
+                                    {{ comment.content }}
+                                    <p id="space"></p>
+                                </div>
 
-		    {% if comments %}
-		    <br />
-		        <h2 id="comment_title"><u>Comments</u></h2>    
-		        <ul id="post_comments">
-		        	{% for comment in comments %}
-		        	<li>{{ comment.user }} replied: {{ comment.content }}</li>
-		        	{% endfor %}
-		        	
-		        </ul>
-		    {% else %}
-		        <strong> No comments currently on this post.</strong>
-		    {% endif %}
+                            </div>
+                            {% endfor %}
 
-		    {% if user.is_authenticated %}
-		        <form id="comment_form" method="post">
+                        {% else %}
+                        <strong> No comments currently on this post.</strong>
+                        {% endif %}
 
-		{% csrf_token %}
-		{% for hidden in form.hidden_fields %}
-		    {{ hidden }}
-		{% endfor %}
-		{% for field in form.visible_fields %}
-		    {{ field.errors }}
-		    {{ field.help_text }}
-		    {{ field }}
-		{% endfor %}
+                        {% if user.is_authenticated %}
+		        		<form id="comment_form" method="post">
 
-		<input type="submit" name="submit" value="Create Comment" />
-		    {% endif %}
+						{% csrf_token %}
+						{% for hidden in form.hidden_fields %}
+							{{ hidden }}
+						{% endfor %}
+						{% for field in form.visible_fields %}
+							{{ field.errors }}
+							{{ field.help_text }}
+							{{ field }}
+						{% endfor %}
 
-		    
-		{% else %}
-		    The post you are looking for does not exist.
-			<a href="{% url 'cycle_angelo:index' %}">Return to the home page</a>
-		{% endif %}
+						<input type="submit" name="submit" value="Create Comment" />
+		    			{% endif %}
 
+                    </div>
+                </div>
+            </section>
+            {% else %}
+            <p>The post you are looking for does not exist.
+            <a href="{% url 'cycle_angelo:index' %}">Return to the home page</a>
+			</p>
+            {% endif %}
+        </div>
+	</div>
 	</div>
 
 	{% endblock %}
