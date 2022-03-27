@@ -12,7 +12,9 @@
             	background-image: url(images/chain_v2.png);
                 background-repeat: repeat-x;
             }
-
+            .wrapper{
+                align-items: stretch;
+            }
             .navbar
             .sidebar {
                 position: fixed;
