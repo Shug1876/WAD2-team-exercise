@@ -17,7 +17,7 @@ class UserProfile(models.Model):
 class Post(models.Model):
     TITLE_MAX_LENGTH = 128
     post_ID = models.AutoField(primary_key=True)
-    content = models.CharField(max_length=200)
+    content = models.TextField()
     creator = models.ForeignKey(User,
         on_delete=models.CASCADE,
         related_name='posts',
@@ -44,7 +44,8 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     comment_ID = models.AutoField(primary_key=True)
-    content = models.CharField(max_length=150)
+    content = models.TextField(max_length=150)
+    created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.content

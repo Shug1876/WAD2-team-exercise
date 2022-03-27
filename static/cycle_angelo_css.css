@@ -102,43 +102,19 @@
 
         /*For individual post page*/
 
-        #unique_post{
-            width: 50%;
-            height: 60vh;
-            display: inline-block;
+        #comments{
+             display: inline;
         }
 
-#post_content{
-            font-size: 19px;
-            margin-left: 25px;
-            height: 60vh;
-            width: 75%;
-        }
-        #post_content p{
-            margin-top: 20px;
-            margin-left: 10px;
-        }
-        #post_title{
-            font-size: 25px;
-            margin:  auto;
-            margin-left: 25px;
+        #comments ul{
+            overflow-y: scroll;
+            width:100%;
         }
 
-        #unique_post_comments{
-            width: 50%;
-            display: inline;
-            float: right;
+        #comments li{
+            list-style-type: none;
+        }
 
-        }
-        #comment_title{
-            display: inline;
-            margin-top: 10%;
-        }
-        #comment_link{
-            margin-left: 33%;
-            text-align: center;
-            display: block;
-        }
 
         /*For login page*/
         #login_input{
