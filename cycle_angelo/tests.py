@@ -5,8 +5,9 @@ import django
 django.setup()
 
 from django.test import TestCase
-from cycle_angelo.models import Post, User
+from cycle_angelo.models import Post, User, Comment
 from django.urls import reverse
+import random
 
 # Create your tests here.
 
@@ -60,7 +61,6 @@ class IndexViewTests(TestCase):
 
         response = self.client.get(reverse('cycle_angelo:index'))
         self.assertEqual(response.status_code, 200)
-        print(response.context)
         self.assertQuerysetEqual(response.context['top_posts'], rankings)
 
     def test_five_new_posts(self):
@@ -87,6 +87,11 @@ def add_post(content, name, title='', comments=0):
     post = Post.objects.get_or_create(title=title, content=content,
                                     creator=creator, number_of_comments=comments)[0]
     post.save()
+    if comments > 0:
+        for i in range(comments):
+            comment = Comment(post=post, content=random.randint(1,100))
+            comment.save()
+
     return post
 
 
@@ -97,20 +102,61 @@ class ShowPostViewTests(TestCase):
     check content is present
     check comments
     '''
-    '''
+
     def test_post_no_title(self):
-        add_post(content="hello", name='Lucas')
-        response = self.client.get(reverse('cycle_angelo:show_post'))
-        not sure how to access the exact post I created for the test.
+        post = add_post(content="hello", name='Lucas')
+        url = reverse('cycle_angelo:show_post', args=(post.slug,))
+        response = self.client.get(url)
 
         self.assertEqual(response.status_code, 200)
-    '''
+        self.assertEqual(response.context['post'], post)
 
-    pass
+
+    def test_post_with_title(self):
+        post = add_post(content="hello", name='Lucas',  title='hiya')
+        url = reverse('cycle_angelo:show_post', args=(post.slug,))
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['post'], post)
+
+    def test_post_with_comments(self):
+        post = add_post(content="hello", name='Lucas', comments = 5)
+        url = reverse('cycle_angelo:show_post', args=(post.slug,))
+        response = self.client.get(url)
+
+        num_comments = len(response.context['comments'])
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(num_comments, 5)
+
+    def test_post_slug_no_title(self):
+        post = add_post(content="Hi I'm new here!", name='Lucas')
+        url = reverse('cycle_angelo:show_post', args=(post.slug,))
+        response = self.client.get(url)
+
+        self.assertEqual(url, "/cycle_angelo/post/hi-im-new-here/")
+
+    def test_post_slug_with_title(self):
+        post = add_post(content="Hi I'm new here!", name='Lucas', title="hiya")
+        url = reverse('cycle_angelo:show_post', args=(post.slug,))
+        response = self.client.get(url)
+
+        self.assertEqual(url, "/cycle_angelo/post/hi-im-new-here/")
+
+
+
+
 
 class AddCommentViewTests(TestCase):
     '''
     tests to see if adding comments works
     empty comments
-
     '''
+
+    def test_add_comment_link_works(self):
+        post = add_post(content="Hi I'm new here!", name='Lucas')
+        url = reverse('cycle_angelo:add_comment', args=(post.slug,))
+        response = self.client.get(url)
+        print(response)
+
+        self.assertEqual(response.status_code, 200)

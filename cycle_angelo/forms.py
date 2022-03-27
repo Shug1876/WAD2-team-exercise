@@ -16,7 +16,7 @@ class CommentForm(forms.ModelForm):
     
     class Meta:
         model = Comment
-        exclude = ('post',)
+        exclude = ('post','user',)
         
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
