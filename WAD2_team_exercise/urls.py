@@ -29,11 +29,11 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('cycle_angelo/', include('cycle_angelo.urls')),
     path('admin/', admin.site.urls),
-
     path('accounts/register/',
          MyRegistrationView.as_view(),
          name='registration_register'),
 
     path('accounts/', include('registration.backends.simple.urls')),
+    path('accounts/', include('allauth.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
