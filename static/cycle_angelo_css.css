@@ -2,7 +2,7 @@
 /*For base template*/
 
             body{
-        		background-color: #ced4de;
+        		background-color: #aacaf0;
         	}
 
             #chain_line{
@@ -54,9 +54,7 @@
                 font-size: 25px;
                 background-color: #aacaf0;
             }
-        #body_block{
-            background-color: #aacaf0;
-        }
+
         #space{
                 padding: 1em 1em 1em 1em;
             }
