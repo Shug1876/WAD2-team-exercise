@@ -16,7 +16,7 @@ class UserProfile(models.Model):
 
 class Post(models.Model):
     TITLE_MAX_LENGTH = 128
-    post_ID = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     content = models.TextField()
     creator = models.ForeignKey(User,
         on_delete=models.CASCADE,

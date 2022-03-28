@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class PostForm(forms.ModelForm):
     title = forms.CharField(help_text="Want to add a title? Add one here!", required=False)
-    content = forms.CharField(max_length=200, help_text='Please enter the text for the post you want to share!')
+    content = forms.CharField(max_length=1000, help_text='Please enter the text for the post you want to share!')
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
      
     class Meta:
@@ -12,7 +12,7 @@ class PostForm(forms.ModelForm):
         fields = ('title','content',)
     
 class CommentForm(forms.ModelForm):
-    content = forms.CharField(max_length=150)
+    content = forms.CharField(max_length=300)
     
     class Meta:
         model = Comment

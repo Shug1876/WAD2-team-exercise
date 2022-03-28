@@ -121,8 +121,8 @@
 
                 <main role="main" class="col pl-2 pt-2">
                     <header>
-                        <div id="content" style="background-color: #aacaf0">
-                        <nav class="navbar navbar-light shadow mb-4 topbar static-top" style="background-color: #aacaf0">
+                        <div id="content">
+                        <nav class="navbar navbar-light shadow mb-4 topbar static-top" style="background-color: #fbfbfb">
                             <div class="container-fluid" style="background-color: #aacaf0">
 
                         <button type="button" id="sidebarCollapse" class="btn btn-info">
@@ -156,6 +156,7 @@
                         {% endblock %}
                     </div>
 
+                    <p id="space"></p>
 
                     <!-- FOOTER -->
                     <footer class="bg-white sticky-footer">
@@ -168,11 +169,13 @@
             </div>
         </div>
         </div>
+
         <!-- Bootstrap core JavaScript -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-        <script src="{% static 'sidebar.js' %}"></script>
+        <!-- Other JS -->
+        <script src="{% static 'cycle_angelo_script.js' %}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
         <script src="https://getbootstrap.com/docs/4.2/examples/dashboard/dashboard.js"></script>
     </body>

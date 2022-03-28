@@ -27,6 +27,7 @@ def index(request):
 
     return render(request, 'cycle_angelo/index.html', context=context_dict)
 
+
 def contact_us(request):
     context_dict = {}
 
@@ -51,6 +52,7 @@ def add_post(request):
             print(form.errors)
 
     return render(request, 'cycle_angelo/add_post.html', {'form': form})
+
 
 def show_post(request, post_name_slug):
     context_dict = {}
@@ -80,7 +82,6 @@ def show_post(request, post_name_slug):
     if request.method == 'POST':
         form = CommentForm(request.POST)
 
-
         if form.is_valid:
             if post:
                 post.number_of_comments += 1
@@ -90,10 +91,9 @@ def show_post(request, post_name_slug):
                 comment.user = request.user
                 comment.save()
 
-                return render(request,'cycle_angelo/post.html', context=context_dict)
+                return render(request, 'cycle_angelo/post.html', context=context_dict)
         else:
             print(form.errors)
-    
 
     return render(request, 'cycle_angelo/post.html', context=context_dict)
 
@@ -255,3 +255,21 @@ def visitor_cookie_handler(request):
     else:
         request.session['last_visit'] = last_visit_cookie
         request.session['visits'] = visits
+
+
+class LikePostView(View):
+    @method_decorator(login_required)
+    def get(self, request):
+        post_id = request.GET['post_id']
+
+        try:
+            post = Post.objects.get(id=int(post_id))
+        except Post.DoesNotExist:
+            return HttpResponse(-1)
+        except ValueError:
+            return HttpResponse(-1)
+
+        post.likes = post.likes + 1
+        post.save()
+
+        return HttpResponse(post.likes)
