@@ -19,22 +19,32 @@
         {% endblock %}
 
 	{% block body_block %}
+		<div class="container">
+			<div class="row">
+				<form role="form" id="page_form" method="post"
+				action="/cycle_angelo/add_post/">
 
-	<form id="post_form" method="post" action="/cycle_angelo/add_post/">
+					{% csrf_token %}
 
-		{% csrf_token %}
-		{% for hidden in form.hidden_fields %}
-		    {{ hidden }}
-		{% endfor %}
-		{% for field in form.visible_fields %}
-		    {{ field.errors }}
-		    {{ field.help_text }}
-		    {{ field }}
-		    <br />
-		    <br />
-		{% endfor %}
+					{% for hidden in form.hidden_fields %}
+						{{ hidden }}
+					{% endfor %}
 
-		<input type="submit" name="submit" value="Create Post" />
+					{% for field in form.visible_fields %}
+						{{ field.errors }}
+						{{ field.help_text }}<br />
+						{{ field }}<br />
+						<div class="p-2"></div>
+					{% endfor %}
+					<br />
+					<button class="btn btn-primary" type="submit" name="submit">
+					Create Post
+					</button>
+
+					<div class="p-5"></div>
+				</form>
+			</div>
+	</div>
 
     {% endblock %}
 </body>

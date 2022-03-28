@@ -1,4 +1,5 @@
 {% extends 'cycle_angelo/base.html' %}
+{% load socialaccount %}
 
 <html>
     <head>
@@ -26,13 +27,21 @@
             value="Submit">Sign in</button>
             </form>
         </div>
+        <p id="space"></p>
+
+        <div class="container">
+
+            <p>
+            Not registered?
+            <a href="{% url 'registration_register' %}">Register here!</a> or <a href="{% provider_login_url 'google' %}"> Login with Google! </a>
+            </p>
+
+
+        </div>
 
         <p id="space"></p>
 
-        <p>
-            Not registered?
-            <a href="{% url 'registration_register' %}">Register here!</a>
-        </p>
+
 
         {% endblock %}
     </body>

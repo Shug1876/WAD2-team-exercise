@@ -22,9 +22,13 @@
     </head>
 
     <body>
+    <div class="wrapper">
         <div class="container-fluid">
             <div class="row">
-                <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <nav id="sidebar" class="col-md-2 d-none d-md-block bg-light sidebar">
+                    <div id="dismiss">
+                        <span data-feather="arrow-left"></span>
+                    </div>
                     <div class="sidebar-sticky">
                         {% block sidebar_block %}
                             <ul class="nav flex-column">
@@ -115,28 +119,42 @@
                     </div>
                 </nav>
 
-                <main role="main" class="col-md-9  ml-sm-auto col-lg-10 px-4">
+                <main role="main" class="col pl-2 pt-2">
                     <header>
+                        <div id="content" style="background-color: #aacaf0">
+                        <nav class="navbar navbar-light shadow mb-4 topbar static-top" style="background-color: #aacaf0">
+                            <div class="container-fluid" style="background-color: #aacaf0">
+
+                        <button type="button" id="sidebarCollapse" class="btn btn-info">
+                            <i class="fas fa-align-left"></i>
+                            <span data-feather="menu"></span>
+                        </button>
+
+                            </div>
+                        </nav>
+                        </div>
+
+                    </header>
+
                     <nav class="navbar navbar-light shadow mb-4 topbar static-top" style="background-color: #aacaf0">
                     <div class="container-fluid"><button class="btn btn-link link-primary d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button><img src="{% static 'images/house_and_bike.png' %}" width="50" height="50"><span class="fs-2 text-dark"><h1>Cycle Angelo</h1></span><img src="{% static 'images/chainring.png' %}" width="50" height="50"></div>
                     </nav>
                     <div id ="chain_line"></div>
-                    </header>
 
-                    <div>
-
-                     <h2 id="sub_heading">
-                         {% block sub_heading %}
-                         <h1 class="jumbotron-heading">Base Template </h1>
-                         {% endblock %}
-                     </h2>
-
+                    <div class="jumbotron p-4">
+                        <div class="container">
+                            <h1 class="jumbotron-heading">
+                                {% block sub_heading %}
+                                Base Template
+                                {% endblock %}
+                            </h1>
+                        </div>
                     </div>
-                    <div id="body_block">
+
+                    <div id="body_block" style="background-color: #aacaf0">
                         {% block body_block %}
                         {% endblock %}
                     </div>
-"
 
 
                     <!-- FOOTER -->
@@ -149,10 +167,12 @@
                 </main>
             </div>
         </div>
-
+        </div>
         <!-- Bootstrap core JavaScript -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script>window.jQuery || document.write('<script src="https://getbootstrap.com/docs/4.2/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="https://getbootstrap.com/docs/4.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+        <script src="{% static 'sidebar.js' %}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
         <script src="https://getbootstrap.com/docs/4.2/examples/dashboard/dashboard.js"></script>
     </body>
