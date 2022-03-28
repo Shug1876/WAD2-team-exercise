@@ -40,6 +40,7 @@ def add_comment(bp, content):
     creator = User(username="username"+str(random.randint(1,1000)))
     creator.save()
     c = Comment.objects.get_or_create(post=bp, user=creator, content=content)[0]
+    c.number_of_comments += 1
     c.save()
     return c
 
