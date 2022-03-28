@@ -30,10 +30,11 @@ def populate():
 
 
 def add_post(bp):
-    creator = User(username=random.randint(1,1000))
+    creator = User(username="username"+str(random.randint(1,1000))) #random.randint(1,1000)
     creator.save()
     content = bp
-    bp = Post.objects.get_or_create(content=content, creator=creator)[0]
+    print(content, bp)
+    bp = Post.objects.get_or_create(creator=creator, content=content)[0]
     bp.save()
     return bp
 
