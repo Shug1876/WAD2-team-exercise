@@ -17,7 +17,6 @@ def populate():
                        'New bike day, ready for some miles in the summer!' : {'comments':post2_comments},
                        'Wanting to stay motivated and get better on the bike. Any ideas?' : {'comments':post3_comments}}
 
-
     for blogPost, comments in test_blogPosts.items():
         bp = add_post(blogPost)
         for c in comments['comments']:
@@ -30,18 +29,17 @@ def populate():
 
 
 def add_post(bp):
-    creator = User(username="username"+str(random.randint(1,1000))) #random.randint(1,1000)
+    creator = User(username="username"+str(random.randint(1,1000)))
     creator.save()
     content = bp
-    print(content, bp)
     bp = Post.objects.get_or_create(creator=creator, content=content)[0]
     bp.save()
     return bp
 
 def add_comment(bp, content):
-    creator = User(username=random.randint(1,1000))
+    creator = User(username="username"+str(random.randint(1,1000)))
     creator.save()
-    c = Comment.objects.get_or_create(post=bp, content=content, user=creator)[0]
+    c = Comment.objects.get_or_create(post=bp, user=creator, content=content)[0]
     c.save()
     return c
 
