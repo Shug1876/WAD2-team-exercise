@@ -5,13 +5,40 @@ import django
 django.setup()
 
 from django.test import TestCase
-from cycle_angelo.models import Post, User, Comment
+from cycle_angelo.models import Post, User, Comment, UserProfile
 from django.urls import reverse
 import random
-from django.db import IntegrityError
+
 
 # Create your tests here.
 
+####### Helper functions #########
+random.seed(485309)
+def add_post(content, name, title='', comments=0):
+
+    creator = User(username=name)
+    if not creator.DoesNotExist:
+        creator = User(random.randint(1,1000))
+    creator.save()
+    post = Post.objects.get_or_create(title=title, content=content,
+                                    creator=creator, number_of_comments=comments)[0]
+    post.save()
+    if comments > 0:
+        for i in range(comments):
+            comm = random.randint(1, 1000)
+            add_comment(post, comm)
+    return post
+
+def add_comment(post, content):
+    creator = User(username=random.randint(1,1000))
+    if not creator.DoesNotExist:
+        creator = User(random.randint(1,1000))
+    creator.save()
+    c = Comment.objects.get_or_create(post=post, content=content, user=creator)[0]
+    c.save()
+    return c
+
+####### Testing Classes ########
 
 class IndexViewTests(TestCase):
     '''
@@ -51,14 +78,14 @@ class IndexViewTests(TestCase):
         Checks to make sure the top posts are ordered correctly by number of
         comments
         '''
-        add_post('I love bikes', 'Bikes are great', 'Lucas', 10)
-        add_post('Morning!', 'Lovely ride along the Kelvin', 'Adam', 2)
-        add_post('Biking', 'good places to ride?', 'Nile', 5)
-        add_post('Gears', 'need new gears', 'Hamish', 1)
-        add_post('Howdy!', 'Wrong app!', 'Rango', 7)
+        add_post(title='I love bikes', content='Bikes are great', name='Lucas', comments=10)
+        add_post(title='Morning!', content='Lovely ride along the Kelvin', name='Adam', comments=2)
+        add_post(title='Biking', content='good places to ride?', name='Nile', comments=5)
+        add_post(title='Gears', content='need new gears', name='HamishC', comments=1)
+        add_post(title='Howdy!', content='Wrong app!', name='Rango', comments=7)
 
-        rankings = ['<Post: Lucas>', '<Post: Rango>', '<Post: Nile>',
-                    '<Post: Adam>', '<Post: Hamish>']
+        rankings = ['<Post: I love bikes>', '<Post: Howdy!>', '<Post: Biking>',
+                    '<Post: Morning!>', '<Post: Gears>']
 
         response = self.client.get(reverse('cycle_angelo:index'))
         self.assertEqual(response.status_code, 200)
@@ -68,11 +95,11 @@ class IndexViewTests(TestCase):
         '''
         Checks to make sure the order of the new posts are being shown correctly
         '''
-        add_post(title='I love bikes', content='Bikes are great', name='Lucas', comments=10)
-        add_post(title='Morning!', content='Lovely ride along the Kelvin', name='Adam', comments=2)
-        add_post(title='Biking', content='good places to ride?', name='Nile', comments=5)
-        add_post(title='Gears', content='need new gears', name='HamishC', comments=1)
-        add_post(title='Howdy!', content='Wrong app!', name='Rango', comments=7)
+        add_post(title='I love bikes', content='Bikes are great', name='Lucas')
+        add_post(title='Morning!', content='Lovely ride along the Kelvin', name='Adam')
+        add_post(title='Biking', content='good places to ride?', name='Nile')
+        add_post(title='Gears', content='need new gears', name='HamishC')
+        add_post(title='Howdy!', content='Wrong app!', name='Rango')
 
         rankings = ['<Post: Howdy!>', '<Post: Gears>', '<Post: Biking>',
                     '<Post: Morning!>', '<Post: I love bikes>']
@@ -81,30 +108,6 @@ class IndexViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(response.context['new_posts'], rankings)
 
-
-def add_post(content, name, title='', comments=0):
-
-    creator = User(username=name)
-    if not creator.DoesNotExist:
-        creator = User(random.randint(1,1000))
-    creator.save()
-    post = Post.objects.get_or_create(title=title, content=content,
-                                    creator=creator, number_of_comments=comments)[0]
-    post.save()
-    if comments > 0:
-        for i in range(comments):
-            comm = random.randint(1, 1000)
-            add_comment(post, comm)
-    return post
-
-def add_comment(post, content):
-    creator = User(username=random.randint(1,1000))
-    if not creator.DoesNotExist:
-        creator = User(random.randint(1,1000))
-    creator.save()
-    c = Comment.objects.get_or_create(post=post, content=content, user=creator)[0]
-    c.save()
-    return c
 
 
 
@@ -163,5 +166,11 @@ class ProfileViewTests(TestCase):
     Testing for viewing the ProfileView
     '''
 
-    def test_get_user_details(self):
-        pass
+    def test_profile_page_accessible(self):
+        profile=User(username='Boris')
+        profile.save()
+        name = profile.get_username()
+        url = reverse('cycle_angelo:profile', args=(name,))
+        response = self.client.get(url)
+
+        self.assertURLEqual(url, "/cycle_angelo/profile/Boris/")
